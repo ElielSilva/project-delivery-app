@@ -16,10 +16,10 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
         field: 'product_id',
-        // references: {
-        //   model: 'products',
-        //   key: 'id',
-        // },
+        references: {
+          model: 'products',
+          key: 'id',
+        },
       },
       quantity:{
         type: Sequelize.INTEGER,

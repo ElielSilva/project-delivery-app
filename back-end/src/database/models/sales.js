@@ -14,15 +14,15 @@ module.exports = (sequelize, DataTypes) => {
     tableName: 'sales',
   });
 
-  Sales.associate = (models) => {
-    Sales.belongsTo(models.User,
-      { foreignKey: 'ser_id', as: 'Users' });
-  };
+  // Sales.associate = (models) => {
+  //   Sales.belongsTo(models.User,
+  //     { foreignKey: 'userId', as: 'users' });
+  // };
 
-  Sales.associate = (models) => {
-    Sales.belongsTo(models.User,
-      { foreignKey: 'saller_id', as: 'Users' });
-  };
+  // Sales.associate = (models) => {
+  //   Sales.belongsTo(models.User,
+  //     { foreignKey: 'saller_id', as: 'seller' });
+  // };
 
   return Sales;
 };

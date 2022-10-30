@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, Navigate } from 'react-router-dom';
+import { requestLogin, setToken, requestData } from '../../services/fatchLogin';
 
 // import cooking from '../../images/cooking.png';
 // import './styles.scss';
@@ -7,17 +8,43 @@ import { useNavigate } from 'react-router-dom';
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [isLogged, setIsLogged] = useState(false);
+  const [failedTryLogin, setFailedTryLogin] = useState(false);
+  // const [ loginSucess, setloginSucess ] = useState(true);
   const navigate = useNavigate();
 
   const regex = /\S+@\S+\.\S+/;
   const minPassword = 6;
 
-  function btnSubmit() {
-    localStorage.setItem('mealsToken', '1');
-    localStorage.setItem('cocktailsToken', '1');
-    localStorage.setItem('user', JSON.stringify({ email }));
-    navigate('/');
+  async function btnSubmit(event) {
+    event.preventDefault();
+
+    try {
+      const { token } = await requestLogin('/login', { email, password });
+
+      setToken(token);
+
+      const { role } = await requestData('/login/validate');
+
+      localStorage.setItem('token', token);
+      localStorage.setItem('role', role);
+
+      setIsLogged(true);
+    } catch (error) {
+      setFailedTryLogin(true);
+      setIsLogged(false);
+    }
   }
+
+  useEffect(() => {
+    setFailedTryLogin(false);
+  }, [email, password]);
+
+  function btnResgister() {
+    navigate('/register');
+  }
+
+  if (isLogged) return <Navigate to="/customer/products" />;
 
   return (
     <main id="login">
@@ -58,17 +85,21 @@ function Login() {
         type="button"
         id="registerBtn"
         // disabled={ !(password.length > minPassword && regex.test(email)) }
-        // onClick={ btnSubmit }
+        onClick={ btnResgister }
       >
         Register
       </button>
       {
-        !regex.test(email)
-        && (
-          <span data-testid="common_login__element-invalid-email">
-            Format email invalid
-          </span>
-        )
+        (failedTryLogin)
+          ? (
+            <p data-testid="common_login__element-invalid-email">
+              {
+                `O endereço de e-mail ou a senha não estão corretos.
+                    Por favor, tente novamente.`
+              }
+            </p>
+          )
+          : null
       }
     </main>
   );
@@ -76,8 +107,8 @@ function Login() {
 
 export default Login;
 
-// common_login__input-email
-// common_login__input-password
+// fulana@deliveryapp.com
+// fulana@123
 // common_login__button-login
 // common_login__button-register
 // common_login__element-invalid-email
