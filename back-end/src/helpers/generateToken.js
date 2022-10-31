@@ -8,7 +8,8 @@ const jwtConfig = {
 module.exports = ({ id, email }) => {
   const token = jwt.sign(
     { id, email }, 
-    process.env.JWT_SECRET || "minhaSenhaSuperSecreta",
-    jwtConfig);
+    process.env.JWT_SECRET || 'minhaSenhaSuperSecreta',
+    jwtConfig,
+  );
   return token;
 };

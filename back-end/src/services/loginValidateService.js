@@ -1,13 +1,12 @@
 const { Users } = require('../database/models');
 
-
 const loginValidate = async (data) => {
-  console.log("userExists.role")
+  // console.log("userExists.role")
+  const errorMessage = { status: 403, message: 'Token not found' };
   const userExists = await Users.findByPk(data.id);
-  if(!userExists) throw { status:  401, message: 'Token not found' };
-  console.log(userExists.role)
+  if (!userExists) throw errorMessage;
   return userExists.role;
-}
+};
 
 module.exports = {
   loginValidate,
