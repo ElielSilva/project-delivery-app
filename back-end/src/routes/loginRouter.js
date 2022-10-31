@@ -1,15 +1,13 @@
 const express = require('express');
-// const { generateTokens } = require('../services/tokenGeretor');
-// const { authEmail, authPassword } = require('../middlewares/authEmailAndPassword');
 const loginController = require('../controllers/loginController');
 const loginValidateController = require('../controllers/loginValidateController');
 const auth = require('../middlewares/auth');
 
-const loginRouter = express.Router();
+const registerRouter = express.Router();
 
-loginRouter.use(express.json());
+registerRouter.use(express.json());
 
-loginRouter.post('/', (req, res) => loginController.loginController(req, res));
-loginRouter.get('/validate', auth, (req, res) => loginValidateController(req, res));
+registerRouter.post('/', (req, res) => loginController.loginController(req, res));
+registerRouter.get('/validate', auth, (req, res) => loginValidateController(req, res));
 
-module.exports = loginRouter;
+module.exports = registerRouter;

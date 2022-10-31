@@ -10,6 +10,7 @@ const Routes = require('../routes/index');
 
 app.get('/coffee', (_req, res) => res.status(418).end());
 app.use('/login', Routes.loginRouter);
+app.use('/register', Routes.registerRouter);
 
 // const {Users} = require('../database/models');
 // app.get('/teste',async (req, res) => {
