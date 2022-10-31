@@ -44,6 +44,10 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
         field: 'seller_id',
+        references: {
+          model: 'users',
+          key: 'id',
+        },
       },
     });
   },
