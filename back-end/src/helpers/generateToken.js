@@ -5,9 +5,9 @@ const jwtConfig = {
   algorithm: 'HS256',
 };
 
-module.exports = ({ id, email }) => {
+module.exports = (body) => {
   const token = jwt.sign(
-    { id, email }, 
+    body,
     process.env.JWT_SECRET || 'minhaSenhaSuperSecreta',
     jwtConfig,
   );
