@@ -1,17 +1,45 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { Navigate } from 'react-router-dom';
+import { requestLogin } from '../../services/fatchLogin';
 
 export default function Register() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [isLogged, setIsLogged] = useState(false);
+  const [FailedTryCreate, setFailedTryCreate] = useState(false);
 
   const minPassword = 6;
   const minName = 12;
   const regex = /\S+@\S+\.\S+/;
 
-  function btnSubmit() {
+  async function btnSubmit() {
+    try {
+      const bodyRequestCreate = {
+        name, email, password, role: 'user',
+      };
+      console.log(bodyRequestCreate);
+      const userData = await requestLogin('/register', bodyRequestCreate);
+      console.log(userData);
+      // setToken(token);
 
+      // const { role } = await requestData('/login/validate');
+
+      localStorage.setItem('user', JSON.stringify(userData));
+      // localStorage.setItem('role', role);
+
+      setIsLogged(true);
+    } catch (error) {
+      setFailedTryCreate(true);
+      setIsLogged(false);
+    }
   }
+
+  useEffect(() => {
+    setFailedTryCreate(false);
+  }, [name, email, password]);
+
+  if (isLogged) return <Navigate to="/customer/products" />;
 
   return (
     <main>
@@ -55,6 +83,14 @@ export default function Register() {
       >
         Cadastro
       </button>
+      {
+        FailedTryCreate
+        && (
+          <p data-testid="common_register__element-invalid_register">
+            os campos nome ou email são invalidos
+          </p>
+        )
+      }
     </main>
   );
 }
