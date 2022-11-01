@@ -32,19 +32,28 @@ export default function ProductCard({ id, price, image, name }) {
   }
 
   return (
-    <div datatest-id={ `customer_products__element-card-title-${id}` }>
+    <div>
       <div>
-        <p datatest-id={ `customer_products__element-card-price-${id}` }>{price}</p>
-        <img src={ image } alt={ name } />
+        <p data-testid={ `customer_products__element-card-price-${id}` }>{price}</p>
+        <img
+          data-testid={ `customer_products__img-card-bg-image-${id}` }
+          src={ image }
+          alt={ name }
+        />
       </div>
-      <p>{name}</p>
-      <button type="button" onClick={ () => incrementProduct() }>
+      <p data-testid={ `customer_products__element-card-title-${id}` }>{name}</p>
+      <button
+        data-testid={ `customer_products__button-card-add-item-${id}` }
+        type="button"
+        onClick={ () => incrementProduct() }
+      >
         +
       </button>
-      <p>
+      <p data-testid={ `customer_products__input-card-quantity-${id}` }>
         {quantidade}
       </p>
       <button
+        data-testid={ `customer_products__button-card-rm-item-${id}` }
         type="button"
         onClick={ quantidade === 0
           ? null : () => decrementProduct() }
@@ -61,3 +70,8 @@ ProductCard.propTypes = {
   image: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
 };
+
+// customer_products__img-card-bg-image-<id>
+// - 18: customer_products__button-card-add-item-<id>
+// - 19: customer_products__button-card-rm-item-<id>
+// - 20: customer_products__input-card-quantity-<id></id>

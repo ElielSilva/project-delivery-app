@@ -18,15 +18,15 @@ export default function NavBar() {
   return (
     <div>
       <div>
-        <p datatest-id="customer_products__element-navbar-link-products">Produtos</p>
+        <p data-testid="customer_products__element-navbar-link-products">Produtos</p>
       </div>
       <div>
-        <p datatest-id="customer_products__element-navbar-link-orders">
+        <p data-testid="customer_products__element-navbar-link-orders">
           Meus Pedidos
         </p>
       </div>
       <div>
-        <p datatest-id="customer_products__element-navbar-user-full-name">
+        <p data-testid="customer_products__element-navbar-user-full-name">
           {name}
         </p>
       </div>
@@ -34,7 +34,7 @@ export default function NavBar() {
         <button
           type="button"
           label="sair"
-          datatest-id="customer_products__element-navbar-link-logout"
+          data-testid="customer_products__element-navbar-link-logout"
           onClick={ () => btnQuit }
         >
           Sair
