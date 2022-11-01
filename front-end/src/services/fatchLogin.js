@@ -46,14 +46,14 @@ export const setToken = (token) => {
 
 export const requestData = async (endpoint) => {
   const { data } = await api.get(endpoint);
-  console.log(data);
+  console.log('requestData', data);
 
   return data;
 };
 
 export const requestLogin = async (endpoint, body) => {
   const { data } = await api.post(endpoint, body);
-  console.log(data);
+  console.log('requestLogin', data);
   return data;
 };
 

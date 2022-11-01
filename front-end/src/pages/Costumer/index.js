@@ -9,7 +9,12 @@ export default function Costumer() {
   useEffect(() => {
     async function requestProduct() {
       const allProducts = await requestData('/customer/products');
-      setProducts(allProducts);
+      const newProduct = allProducts.map((product) => {
+        product.price = String(product.price).replace('.', ',');
+        return product;
+      });
+      console.log('newProduct', newProduct);
+      setProducts(newProduct);
     }
     requestProduct();
   }, []);

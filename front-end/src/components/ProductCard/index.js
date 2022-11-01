@@ -8,9 +8,7 @@ import {
 
 export default function ProductCard({ id, price, image, name }) {
   const [quantidade, setQuantidade] = useState(0);
-
   // shoppingCart
-
   useEffect(() => {
     // checkExistStorage();
     const productsStorage = JSON.parse(localStorage.getItem('shoppingCart')) || [];
@@ -18,19 +16,16 @@ export default function ProductCard({ id, price, image, name }) {
     const productsExists = productsStorage.filter((products) => products.id === id);
     if (!productsExists) setQuantidade(productsExists[0].quantity);
   }, [id]);
-
   function incrementProduct() {
     setQuantidade(quantidade + 1);
     const productInfo = { id, name, price };
     incrementProductStorage(productInfo);
   }
-
   function decrementProduct() {
     setQuantidade(quantidade - 1);
     const productInfo = { id };
     decrementProductStorage(productInfo);
   }
-
   return (
     <div>
       <div>
@@ -63,7 +58,6 @@ export default function ProductCard({ id, price, image, name }) {
     </div>
   );
 }
-
 ProductCard.propTypes = {
   id: PropTypes.number.isRequired,
   price: PropTypes.number.isRequired,

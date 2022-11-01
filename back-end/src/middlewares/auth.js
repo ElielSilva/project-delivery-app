@@ -1,8 +1,10 @@
+require('dotenv').config();
 const jwt = require('jsonwebtoken');
 
 module.exports = (req, res, next) => {
   try {
     const { authorization } = req.headers;
+    console.log(authorization);
     if (!authorization) return res.status(401).json({ message: 'Token not found' });
     const x = jwt.verify(authorization, process.env.JWT_SECRET);
     console.log(authorization);
