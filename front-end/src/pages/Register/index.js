@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
-import { requestLogin } from '../../services/fatchLogin';
+import { requestLogin } from '../../services/fetchLogin';
 
 export default function Register() {
   const [name, setName] = useState('');
@@ -16,11 +16,11 @@ export default function Register() {
   async function btnSubmit() {
     try {
       const bodyRequestCreate = {
-        name, email, password, role: 'user',
+        name, email, password, role: 'customer',
       };
       console.log(bodyRequestCreate);
       const userData = await requestLogin('/register', bodyRequestCreate);
-      console.log(userData);
+      // console.log(userData);
       // setToken(token);
 
       // const { role } = await requestData('/login/validate');

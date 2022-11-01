@@ -10,11 +10,12 @@ function App() {
   return (
     <div>
       <Routes>
-        <Route exact path="/" element={ <Navigate to="/login" replace /> } />
         <Route exact path="/login" element={ <Login /> } />
         <Route exact path="/register" element={ <Register /> } />
         <Route exact path="/customer" element={ <Costumer /> } />
         <Route exact path="/customer/checkout" element={ <CustomerCheckout /> } />
+        <Route exact path="/customer/products" element={ <Costumer /> } />
+        <Route exact path="/" element={ <Navigate to="/login" replace /> } />
       </Routes>
     </div>
   );
