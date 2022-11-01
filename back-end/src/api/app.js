@@ -2,14 +2,15 @@ const express = require('express');
 const cors = require('cors');
 require('express-async-errors');
 const httpErrorMiddleware = require('../middlewares/httpErrorMiddleware');
+const routes = require('../routes');
 
 const app = express();
+app.use(express.json());
 app.use(cors());
 
-const Routes = require('../routes/index');
 
 app.get('/coffee', (_req, res) => res.status(418).end());
-app.use('/login', Routes.loginRouter);
+app.use(routes);
 
 // const {Users} = require('../database/models');
 // app.get('/teste',async (req, res) => {
