@@ -16,11 +16,11 @@ export default function Register() {
   async function btnSubmit() {
     try {
       const bodyRequestCreate = {
-        name, email, password, role: 'user',
+        name, email, password, role: 'customer',
       };
       console.log(bodyRequestCreate);
       const userData = await requestLogin('/register', bodyRequestCreate);
-      console.log(userData);
+      // console.log(userData);
       // setToken(token);
 
       // const { role } = await requestData('/login/validate');
