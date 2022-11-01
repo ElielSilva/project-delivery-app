@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { requestLogin, setToken, requestData } from '../../services/fatchLogin';
 
 // import cooking from '../../images/cooking.png';
@@ -45,7 +45,7 @@ function Login() {
     navigate('/register');
   }
 
-  if (isLogged) return <Navigate to="/customer/products" />;
+  if (isLogged) navigate('/customer/products');
 
   return (
     <main id="login">

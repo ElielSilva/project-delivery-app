@@ -8,9 +8,7 @@ import {
 
 export default function ProductCard({ id, price, image, name }) {
   const [quantidade, setQuantidade] = useState(0);
-
   // shoppingCart
-
   useEffect(() => {
     // checkExistStorage();
     const productsStorage = JSON.parse(localStorage.getItem('shoppingCart')) || [];
@@ -18,33 +16,39 @@ export default function ProductCard({ id, price, image, name }) {
     const productsExists = productsStorage.filter((products) => products.id === id);
     if (!productsExists) setQuantidade(productsExists[0].quantity);
   }, [id]);
-
   function incrementProduct() {
     setQuantidade(quantidade + 1);
     const productInfo = { id, name, price };
     incrementProductStorage(productInfo);
   }
-
   function decrementProduct() {
     setQuantidade(quantidade - 1);
     const productInfo = { id };
     decrementProductStorage(productInfo);
   }
-
   return (
-    <div datatest-id={ `customer_products__element-card-title-${id}` }>
+    <div>
       <div>
-        <p datatest-id={ `customer_products__element-card-price-${id}` }>{price}</p>
-        <img src={ image } alt={ name } />
+        <p data-testid={ `customer_products__element-card-price-${id}` }>{price}</p>
+        <img
+          data-testid={ `customer_products__img-card-bg-image-${id}` }
+          src={ image }
+          alt={ name }
+        />
       </div>
-      <p>{name}</p>
-      <button type="button" onClick={ () => incrementProduct() }>
+      <p data-testid={ `customer_products__element-card-title-${id}` }>{name}</p>
+      <button
+        data-testid={ `customer_products__button-card-add-item-${id}` }
+        type="button"
+        onClick={ () => incrementProduct() }
+      >
         +
       </button>
-      <p>
+      <p data-testid={ `customer_products__input-card-quantity-${id}` }>
         {quantidade}
       </p>
       <button
+        data-testid={ `customer_products__button-card-rm-item-${id}` }
         type="button"
         onClick={ quantidade === 0
           ? null : () => decrementProduct() }
@@ -54,7 +58,6 @@ export default function ProductCard({ id, price, image, name }) {
     </div>
   );
 }
-
 ProductCard.propTypes = {
   id: PropTypes.number.isRequired,
   price: PropTypes.number.isRequired,
