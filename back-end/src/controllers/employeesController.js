@@ -1,4 +1,4 @@
-const employeeService = require('../services/employeeService');
+const employeeService = require('../services/employeesService');
 
 module.exports = {
   getEmployees: async (req, res) => {
