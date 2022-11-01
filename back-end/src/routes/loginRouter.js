@@ -1,4 +1,4 @@
-const Router = require('express').Router;
+const { Router } = require('express');
 
 const loginController = require('../controllers/loginController');
 const loginValidateController = require('../controllers/loginValidateController');

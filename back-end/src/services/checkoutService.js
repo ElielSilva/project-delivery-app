@@ -6,5 +6,5 @@ module.exports = {
     console.log('checkoutService create====>>>>', data);
     const newSaleProduct = await SalesProducts.create({});
     return newSaleProduct;
-  }
-}
+  },
+};

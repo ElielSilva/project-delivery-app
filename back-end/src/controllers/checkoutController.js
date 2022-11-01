@@ -5,4 +5,4 @@ module.exports = {
     const newSale = checkoutService.create(req.body);
     res.status(204).json(newSale);
   },
-}
+};
