@@ -1,4 +1,4 @@
-const { Products } =  require('../database/models');
+const { Products } = require('../database/models');
 
 const errorMessage = { status: 404, message: 'Products not found' };
 
