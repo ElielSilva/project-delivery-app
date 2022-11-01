@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Navigate } from 'react-router-dom';
-import { requestLogin, setToken, requestData } from '../../services/fatchLogin';
+import { requestLogin, setToken, requestData } from '../../services/fetchLogin';
 
 // import cooking from '../../images/cooking.png';
 // import './styles.scss';
@@ -24,10 +24,11 @@ function Login() {
 
       setToken(token);
 
-      const { role } = await requestData('/login/validate');
+      const userData = await requestData('/login/validate');
 
-      localStorage.setItem('token', token);
-      localStorage.setItem('role', role);
+      // localStorage.setItem('token', token);
+      // localStorage.setItem('role', role);
+      localStorage.setItem('user', JSON.stringify(userData));
 
       setIsLogged(true);
     } catch (error) {
