@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import NavBar from '../../components/NavBar';
 import ProductCard from '../../components/ProductCard';
 import { requestData } from '../../services/fatchLogin';
 
 export default function Costumer() {
   const [products, setProducts] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function requestProduct() {
@@ -18,6 +20,10 @@ export default function Costumer() {
     }
     requestProduct();
   }, []);
+
+  function btnCarShop() {
+    navigate('/customer/checkout');
+  }
 
   return (
     <>
@@ -33,6 +39,13 @@ export default function Costumer() {
           />
         ))
       }
+      <button
+        type="button"
+        data-testid="customer_products__checkout-bottom-value"
+        onClick={ () => { btnCarShop(); } }
+      >
+        Teste
+      </button>
     </>
   );
 }
