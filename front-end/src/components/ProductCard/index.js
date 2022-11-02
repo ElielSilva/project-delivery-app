@@ -44,9 +44,13 @@ export default function ProductCard({ id, price, image, name }) {
       >
         +
       </button>
-      <p data-testid={ `customer_products__input-card-quantity-${id}` }>
-        {quantidade}
-      </p>
+      <input
+        type="number"
+        value={ quantidade }
+        onChange={ ({ target }) => setQuantidade(target.value) }
+        data-testid={ `customer_products__input-card-quantity-${id}` }
+      />
+
       <button
         data-testid={ `customer_products__button-card-rm-item-${id}` }
         type="button"

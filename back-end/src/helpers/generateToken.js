@@ -6,10 +6,13 @@ const jwtConfig = {
   algorithm: 'HS256',
 };
 
+const jwtKey = require("fs")
+  .readFileSync("../../jwt.evaluation.key", { encoding: "utf-8" });
+
 module.exports = (body) => {
   const token = jwt.sign(
     body,
-    process.env.JWT_SECRET || 'secret_key',
+    jwtKey,
     jwtConfig,
   );
   return token;

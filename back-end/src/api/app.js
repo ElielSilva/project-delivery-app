@@ -5,6 +5,7 @@ const httpErrorMiddleware = require('../middlewares/httpErrorMiddleware');
 
 const app = express();
 app.use(cors());
+app.use('/images', express.static('public'));
 
 const Routes = require('../routes/index');
 
@@ -12,6 +13,8 @@ app.get('/coffee', (_req, res) => res.status(418).end());
 app.use('/login', Routes.loginRouter);
 app.use('/register', Routes.registerRouter);
 app.use('/customer/products', Routes.costumerProductsRouter);
+
+
 
 // const {Users} = require('../database/models');
 // app.get('/teste',async (req, res) => {
