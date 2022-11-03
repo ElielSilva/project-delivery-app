@@ -45,7 +45,7 @@ function Login() {
     navigate('/register');
   }
 
-  if (isLogged) return <Navigate to="/customer/products" replace />;
+  if (isLogged) return <Navigate to="/customer/products" />;
 
   return (
     <main id="login">

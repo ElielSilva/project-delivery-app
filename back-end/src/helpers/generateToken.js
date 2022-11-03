@@ -21,7 +21,7 @@ const jwtKey = require("fs")
 
 module.exports = async (body) => {
   // const jwtKey = fs.readFileSync('jwt.evaluation.key.',"utf-8" )
-  console.log( jwtKey )
+  // console.log( jwtKey )
   const token = jwt.sign(
     body,
     jwtKey,

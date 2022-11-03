@@ -5,10 +5,12 @@ import {
   incrementProductStorage,
   decrementProductStorage,
 } from '../../services/storage';
+// import { ShoppingContext } from '../../context/ShoppingContext';
 
 export default function ProductCard({ id, price, image, name }) {
   const [quantidade, setQuantidade] = useState(0);
-  // shoppingCart
+  // const { setTotalPrice } = useContext(ShoppingContext);
+
   useEffect(() => {
     // checkExistStorage();
     const productsStorage = JSON.parse(localStorage.getItem('shoppingCart')) || [];
@@ -16,16 +18,31 @@ export default function ProductCard({ id, price, image, name }) {
     const productsExists = productsStorage.filter((products) => products.id === id);
     if (!productsExists) setQuantidade(productsExists[0].quantity);
   }, [id]);
+
+  // function addTotalPrice() {
+  //   const shoppingCart = JSON.parse(localStorage.getItem('shoppingCart')) || [];
+  //   const shoppingCartSome = shoppingCart.reduce((acc, curr) => {
+  //     const subTotal = parseFloat(String(curr.subTotal)
+  //       .replace(',', '.'));
+  //     return acc + subTotal;
+  //   }, 0.00).toFixed(2);
+  //   setTotalPrice(shoppingCartSome || '00,00');
+  // }
+
   function incrementProduct() {
     setQuantidade(quantidade + 1);
     const productInfo = { id, name, price };
     incrementProductStorage(productInfo);
+    addTotalPrice();
   }
+
   function decrementProduct() {
     setQuantidade(quantidade - 1);
     const productInfo = { id };
     decrementProductStorage(productInfo);
+    addTotalPrice();
   }
+
   return (
     <div>
       <div>

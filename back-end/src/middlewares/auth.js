@@ -1,13 +1,16 @@
 require('dotenv').config();
 const jwt = require('jsonwebtoken');
 
+const jwtKey = require("fs")
+  .readFileSync("./jwt.evaluation.key", { encoding: "utf-8" });
+
 module.exports = (req, res, next) => {
   try {
     const { authorization } = req.headers;
-    console.log(authorization);
+    // console.log(authorization);
     if (!authorization) return res.status(401).json({ message: 'Token not found' });
-    const x = jwt.verify(authorization, process.env.JWT_SECRET);
-    console.log(authorization);
+    const x = jwt.verify(authorization, jwtKey);
+    // console.log(authorization);
     req.id = x.id;
     next();
   } catch (error) {

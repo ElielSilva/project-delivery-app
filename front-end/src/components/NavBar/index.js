@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 // import { PropTypes } from 'prop-types';
 
 export default function NavBar() {
   const [name, setName] = useState('');
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const userStorage = JSON.parse(localStorage.getItem('user'));
@@ -11,8 +13,9 @@ export default function NavBar() {
   }, []);
 
   function btnQuit() {
-    localStorage.setItem('user', '');
-    Navigate('/');
+    localStorage.clear();
+    console.log('foi');
+    navigate('/');
   }
 
   return (
@@ -35,7 +38,7 @@ export default function NavBar() {
           type="button"
           label="sair"
           data-testid="customer_products__element-navbar-link-logout"
-          onClick={ () => btnQuit }
+          onClick={ () => btnQuit() }
         >
           Sair
         </button>
