@@ -7,6 +7,7 @@ import {
   incrementInputStorage,
 } from '../../services/storage';
 import { ShoppingContext } from '../../context/ShoppingContext';
+import './index.css';
 
 export default function ProductCard({ id, price, image, name }) {
   const [quantidade, setQuantidade] = useState(0);
@@ -21,12 +22,12 @@ export default function ProductCard({ id, price, image, name }) {
 
   function addTotalPrice() {
     const shoppingCart = JSON.parse(localStorage.getItem('shoppingCart')) || [];
-    const shoppingCartSome = shoppingCart.reduce((acc, curr) => {
-      const subTotal = parseFloat((curr.subTotal)
-        .replace(',', '.'));
-      return acc + subTotal;
-    }, 0.00).toFixed(2).replace('.', ',');
-    setTotalPrice(shoppingCartSome || '00,00');
+    // console.log(shoppingCart);
+    const shoppingCartSome = shoppingCart.reduce(
+      (acc, curr) => acc + curr.subTotal,
+      0.00,
+    ).toFixed(2).replace('.', ',');
+    setTotalPrice(shoppingCartSome || 0.00);
   }
 
   function incrementInput(value) {
@@ -40,6 +41,7 @@ export default function ProductCard({ id, price, image, name }) {
   function incrementProduct() {
     setQuantidade(quantidade + 1);
     const productInfo = { id, name, price };
+    console.log(productInfo);
     incrementProductStorage(productInfo);
     addTotalPrice();
   }
@@ -52,10 +54,13 @@ export default function ProductCard({ id, price, image, name }) {
   }
 
   return (
-    <div>
+    <main>
       <div>
-        <p data-testid={ `customer_products__element-card-price-${id}` }>{price}</p>
+        <p data-testid={ `customer_products__element-card-price-${id}` }>
+          {String(price).replace('.', ',')}
+        </p>
         <img
+          id="image"
           data-testid={ `customer_products__img-card-bg-image-${id}` }
           src={ image }
           alt={ name }
@@ -84,7 +89,7 @@ export default function ProductCard({ id, price, image, name }) {
       >
         -
       </button>
-    </div>
+    </main>
   );
 }
 ProductCard.propTypes = {

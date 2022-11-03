@@ -12,7 +12,7 @@ export default function Costumer() {
     async function requestProduct() {
       const allProducts = await requestData('/customer/products');
       const newProduct = allProducts.map((product) => {
-        product.price = String(product.price).replace('.', ',');
+        product.price = parseFloat(product.price);
         return product;
       });
       setProducts(newProduct);
