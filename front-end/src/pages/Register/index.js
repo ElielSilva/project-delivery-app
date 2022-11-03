@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
-import { requestLogin } from '../../services/fatchLogin';
+import { requestLogin } from '../../services/fetchLogin';
 
 export default function Register() {
   const [name, setName] = useState('');

@@ -3,11 +3,11 @@ const registerController = require('../controllers/resgisterController');
 // const loginValidateController = require('../controllers/loginValidateController');
 // const auth = require('../middlewares/auth');
 
-const loginRouter = express.Router();
+const registerRouter = express.Router();
 
-loginRouter.use(express.json());
+registerRouter.use(express.json());
 
-loginRouter.post('/', (req, res) => registerController.registerController(req, res));
-// loginRouter.get('/validate', auth, (req, res) => loginValidateController(req, res));
+registerRouter.post('/', registerController.registerController);
+// registerRouter.get('/validate', auth, (req, res) => loginValidateController(req, res));
 
-module.exports = loginRouter;
+module.exports = registerRouter;

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Navigate } from 'react-router-dom';
-import { requestLogin, setToken, requestData } from '../../services/fatchLogin';
+import { requestLogin, setToken, requestData } from '../../services/fetchLogin';
 
 // import cooking from '../../images/cooking.png';
 // import './styles.scss';

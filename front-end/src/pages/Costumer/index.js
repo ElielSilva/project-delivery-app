@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 import NavBar from '../../components/NavBar';
 import ProductCard from '../../components/ProductCard';
-import { requestData } from '../../services/fatchLogin';
+import { requestData } from '../../services/fetchLogin';
 
 export default function Costumer() {
   const [products, setProducts] = useState([]);
