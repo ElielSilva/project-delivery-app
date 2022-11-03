@@ -20,10 +20,6 @@ export default function Costumer() {
     requestProduct();
   }, []);
 
-  // function btnCarShop() {
-  //   navigate('/customer/checkout');
-  // }
-
   return (
     <>
       <NavBar />
