@@ -1,11 +1,11 @@
 import React, {
-// useContext,
+  useContext,
 } from 'react';
 import { useNavigate } from 'react-router-dom';
-// import { ShoppingContext } from '../../context/ShoppingContext';
+import { ShoppingContext } from '../../context/ShoppingContext';
 
 export default function Button() {
-  // const { TotalPrice } = useContext(ShoppingContext);
+  const { TotalPrice } = useContext(ShoppingContext);
   const navigate = useNavigate();
 
   function btnCarShop() {
@@ -18,7 +18,7 @@ export default function Button() {
       data-testid="customer_products__checkout-bottom-value"
       onClick={ () => { btnCarShop(); } }
     >
-      TotalPrice
+      {TotalPrice}
     </button>
   );
 }

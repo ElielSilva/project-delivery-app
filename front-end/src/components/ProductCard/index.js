@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { PropTypes } from 'prop-types';
 import {
   // checkExistStorage,
   incrementProductStorage,
   decrementProductStorage,
 } from '../../services/storage';
-// import { ShoppingContext } from '../../context/ShoppingContext';
+import { ShoppingContext } from '../../context/ShoppingContext';
 
 export default function ProductCard({ id, price, image, name }) {
   const [quantidade, setQuantidade] = useState(0);
-  // const { setTotalPrice } = useContext(ShoppingContext);
+  const { setTotalPrice } = useContext(ShoppingContext);
 
   useEffect(() => {
     // checkExistStorage();
@@ -19,15 +19,15 @@ export default function ProductCard({ id, price, image, name }) {
     if (!productsExists) setQuantidade(productsExists[0].quantity);
   }, [id]);
 
-  // function addTotalPrice() {
-  //   const shoppingCart = JSON.parse(localStorage.getItem('shoppingCart')) || [];
-  //   const shoppingCartSome = shoppingCart.reduce((acc, curr) => {
-  //     const subTotal = parseFloat(String(curr.subTotal)
-  //       .replace(',', '.'));
-  //     return acc + subTotal;
-  //   }, 0.00).toFixed(2);
-  //   setTotalPrice(shoppingCartSome || '00,00');
-  // }
+  function addTotalPrice() {
+    const shoppingCart = JSON.parse(localStorage.getItem('shoppingCart')) || [];
+    const shoppingCartSome = shoppingCart.reduce((acc, curr) => {
+      const subTotal = parseFloat(String(curr.subTotal)
+        .replace(',', '.'));
+      return acc + subTotal;
+    }, 0.00).toFixed(2);
+    setTotalPrice(shoppingCartSome || '00,00');
+  }
 
   function incrementProduct() {
     setQuantidade(quantidade + 1);
