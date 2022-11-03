@@ -1,19 +1,15 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useState, useMemo } from 'react';
 import PropTypes from 'prop-types';
 
 export const ShoppingContext = createContext();
 
-export function ShoppingProvider({ ...children }) {
+export function ShoppingProvider(palitinho) {
   const [TotalPrice, setTotalPrice] = useState('0,00');
+  const { children } = palitinho;
   // const [filteredResults, setFilteredResults] = useState([]);
   const TotalPriceCart = useMemo(() => ({
     TotalPrice, setTotalPrice,
   }), [TotalPrice]);
-
-  // const context = {
-  //   TotalPrice,
-  //   setTotalPrice,
-  // };
 
   return (
     <ShoppingContext.Provider value={ TotalPriceCart }>

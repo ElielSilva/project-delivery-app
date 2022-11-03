@@ -4,6 +4,7 @@ import {
   // checkExistStorage,
   incrementProductStorage,
   decrementProductStorage,
+  incrementInputStorage,
 } from '../../services/storage';
 import { ShoppingContext } from '../../context/ShoppingContext';
 
@@ -14,7 +15,6 @@ export default function ProductCard({ id, price, image, name }) {
   useEffect(() => {
     // checkExistStorage();
     const productsStorage = JSON.parse(localStorage.getItem('shoppingCart')) || [];
-    console.log(productsStorage);
     const productsExists = productsStorage.filter((products) => products.id === id);
     if (!productsExists) setQuantidade(productsExists[0].quantity);
   }, [id]);
@@ -22,11 +22,19 @@ export default function ProductCard({ id, price, image, name }) {
   function addTotalPrice() {
     const shoppingCart = JSON.parse(localStorage.getItem('shoppingCart')) || [];
     const shoppingCartSome = shoppingCart.reduce((acc, curr) => {
-      const subTotal = parseFloat(String(curr.subTotal)
+      const subTotal = parseFloat((curr.subTotal)
         .replace(',', '.'));
       return acc + subTotal;
-    }, 0.00).toFixed(2);
+    }, 0.00).toFixed(2).replace('.', ',');
     setTotalPrice(shoppingCartSome || '00,00');
+  }
+
+  function incrementInput(value) {
+    const quantity = value > 0 ? value : 0;
+    setQuantidade(quantity);
+    const productInfo = { id, name, price, quantity };
+    incrementInputStorage(productInfo);
+    addTotalPrice();
   }
 
   function incrementProduct() {
@@ -64,7 +72,7 @@ export default function ProductCard({ id, price, image, name }) {
       <input
         type="number"
         value={ quantidade }
-        onChange={ ({ target }) => setQuantidade(target.value) }
+        onChange={ ({ target }) => incrementInput(target.value) }
         data-testid={ `customer_products__input-card-quantity-${id}` }
       />
 
@@ -81,7 +89,7 @@ export default function ProductCard({ id, price, image, name }) {
 }
 ProductCard.propTypes = {
   id: PropTypes.number.isRequired,
-  price: PropTypes.number.isRequired,
+  price: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
 };

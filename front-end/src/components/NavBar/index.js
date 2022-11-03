@@ -14,7 +14,6 @@ export default function NavBar() {
 
   function btnQuit() {
     localStorage.clear();
-    console.log('foi');
     navigate('/');
   }
 

@@ -7,10 +7,10 @@ const jwtKey = require("fs")
 module.exports = (req, res, next) => {
   try {
     const { authorization } = req.headers;
-    // console.log(authorization);
+    
     if (!authorization) return res.status(401).json({ message: 'Token not found' });
     const x = jwt.verify(authorization, jwtKey);
-    // console.log(authorization);
+    
     req.id = x.id;
     next();
   } catch (error) {

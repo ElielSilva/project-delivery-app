@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import NavBar from '../../components/NavBar';
 import ProductCard from '../../components/ProductCard';
 import { requestData } from '../../services/fetchLogin';
+import Button from '../../components/Button';
 
 export default function Costumer() {
   const [products, setProducts] = useState([]);
@@ -14,7 +15,6 @@ export default function Costumer() {
         product.price = String(product.price).replace('.', ',');
         return product;
       });
-      console.log('newProduct', newProduct);
       setProducts(newProduct);
     }
     requestProduct();
@@ -38,13 +38,7 @@ export default function Costumer() {
           />
         ))
       }
-      {/* <button
-        type="button"
-        data-testid="customer_products__checkout-bottom-value"
-        onClick={ () => { btnCarShop(); } }
-      >
-        Teste
-      </button> */}
+      <Button />
     </>
   );
 }
