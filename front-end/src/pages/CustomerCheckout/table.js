@@ -80,6 +80,7 @@ export default function SoldProducts({ productsData }) {
           Total: R$
           { total }
         </h2>
+
       </div>
     </div>
   );

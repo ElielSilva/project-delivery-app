@@ -2,14 +2,17 @@ require('dotenv').config();
 const jwt = require('jsonwebtoken');
 
 const jwtConfig = {
-  expiresIn: '1d',
+  expiresIn: '5d',
   algorithm: 'HS256',
 };
 
-module.exports = (body) => {
+const jwtKey = require('fs')
+  .readFileSync('./jwt.evaluation.key', { encoding: 'utf-8' });
+
+module.exports = async (body) => {
   const token = jwt.sign(
     body,
-    process.env.JWT_SECRET || 'minhaSenhaSuperSecreta',
+    jwtKey,
     jwtConfig,
   );
   return token;

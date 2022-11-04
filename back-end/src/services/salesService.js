@@ -12,16 +12,30 @@ const { SalesProducts, Sales } = require('../database/models');
 
 module.exports = {
   create: async (saleData) => {
-    const { userId, sellerId, totalPrice, deliveryAddress,
-      deliveryNumber } = saleData;
+    const { userId,
+      sellerId,
+      totalPrice,
+      deliveryAddress,
+      deliveryNumber,
+      sales
+    } = saleData;
 
-    console.log('checkoutService create====>>>>');
-
-    const newSaleProduct = await Sales.create({
-      userId, sellerId, totalPrice, deliveryAddress, deliveryNumber,
+    const { dataValues } = await Sales.create({
+      userId,
+      sellerId,
+      totalPrice,
+      deliveryAddress,
+      deliveryNumber,
     });
 
-    console.log('checkoutService create====>>>>', newSaleProduct.dataValues);
-    return newSaleProduct.dataValues;
+    await sales.forEach(({ productId, quantity }) => {
+      SalesProducts.create({
+        saleId: dataValues.id,
+        productId,
+        quantity,
+      });
+    });
+
+    return { ...dataValues, sales };
   },
 };

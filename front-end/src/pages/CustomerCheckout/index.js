@@ -75,7 +75,7 @@ export default function CustomerCheckout() {
             data-testid="customer_checkout__input-address"
             id="address"
             type="text"
-            placeholder="Rua dos Bobos, Bairro dos Perdidos"
+            placeholder="Rua dos Bobos"
             value={ deliveryAddress.address }
             onChange={ ({ target }) => setDeliveryAddress(
               { ...deliveryAddress, address: target.value },
@@ -90,7 +90,7 @@ export default function CustomerCheckout() {
             data-testid="customer_checkout__input-address-number"
             id="deliveryNumber"
             type="number"
-            placeholder="198"
+            placeholder="0"
             value={ deliveryAddress.number }
             onChange={ ({ target }) => setDeliveryAddress(
               { ...deliveryAddress, number: target.value },
