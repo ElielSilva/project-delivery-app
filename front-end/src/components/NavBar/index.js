@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
-// import { PropTypes } from 'prop-types';
 
 export default function NavBar() {
   const [name, setName] = useState('');
@@ -43,8 +42,3 @@ export default function NavBar() {
     </div>
   );
 }
-
-// NavBar.propTypes = {
-//   pedidos: PropTypes.number,
-//   nome: PropTypes.string,
-// };
