@@ -1,10 +1,10 @@
 import React, { createContext, useState, useMemo } from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 
 export const ShoppingContext = createContext();
 
 export function ShoppingProvider(palitinho) {
-  const [TotalPrice, setTotalPrice] = useState('0,00');
+  const [TotalPrice, setTotalPrice] = useState(0.00);
   const { children } = palitinho;
   // const [filteredResults, setFilteredResults] = useState([]);
   const TotalPriceCart = useMemo(() => ({
@@ -18,6 +18,6 @@ export function ShoppingProvider(palitinho) {
   );
 }
 
-ShoppingContext.propTypes = {
-  children: PropTypes.arrayOf(PropTypes.node).isRequired,
-};
+// ShoppingContext.propTypes = {
+//   children: PropTypes.arrayOf(PropTypes.node).isRequired,
+// };

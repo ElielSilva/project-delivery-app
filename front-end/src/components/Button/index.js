@@ -15,10 +15,14 @@ export default function Button() {
   return (
     <button
       type="button"
-      data-testid="customer_products__checkout-bottom-value"
+      data-testid="customer_products__button-cart"
+      disabled={ TotalPrice === 0 }
       onClick={ () => { btnCarShop(); } }
     >
-      {TotalPrice}
+      Entra na porra do carrinho
+      <p data-testid="customer_products__checkout-bottom-value">
+        {TotalPrice.toFixed(2).replace('.', ',')}
+      </p>
     </button>
   );
 }

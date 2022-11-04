@@ -26,7 +26,7 @@ export default function ProductCard({ id, price, image, name }) {
     const shoppingCartSome = shoppingCart.reduce(
       (acc, curr) => acc + curr.subTotal,
       0.00,
-    ).toFixed(2).replace('.', ',');
+    );
     setTotalPrice(shoppingCartSome || 0.00);
   }
 
