@@ -19,7 +19,7 @@ export default function Button() {
       disabled={ TotalPrice === 0 }
       onClick={ () => { btnCarShop(); } }
     >
-      Entra na porra do carrinho
+      Carrinho:
       <p data-testid="customer_products__checkout-bottom-value">
         {TotalPrice.toFixed(2).replace('.', ',')}
       </p>

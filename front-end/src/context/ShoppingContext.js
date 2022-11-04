@@ -3,10 +3,9 @@ import React, { createContext, useState, useMemo } from 'react';
 
 export const ShoppingContext = createContext();
 
-export function ShoppingProvider(palitinho) {
+export function ShoppingProvider(childrens) {
   const [TotalPrice, setTotalPrice] = useState(0.00);
-  const { children } = palitinho;
-  // const [filteredResults, setFilteredResults] = useState([]);
+  const { children } = childrens;
   const TotalPriceCart = useMemo(() => ({
     TotalPrice, setTotalPrice,
   }), [TotalPrice]);

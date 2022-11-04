@@ -3,7 +3,6 @@
 export function incrementProductStorage({ id, name, price }) {
   const shoppingCart = JSON.parse(localStorage.getItem('shoppingCart')) || [];
   const productsExists = shoppingCart.some((products) => products.id === id);
-  console.log(price);
   if (productsExists) {
     const shoppingCartModifided = shoppingCart.map((products) => {
       if (products.id === id) {

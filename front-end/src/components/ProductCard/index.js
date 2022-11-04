@@ -14,7 +14,6 @@ export default function ProductCard({ id, price, image, name }) {
   const { setTotalPrice } = useContext(ShoppingContext);
 
   useEffect(() => {
-    // checkExistStorage();
     const productsStorage = JSON.parse(localStorage.getItem('shoppingCart')) || [];
     const productsExists = productsStorage.filter((products) => products.id === id);
     if (!productsExists) setQuantidade(productsExists[0].quantity);
@@ -22,7 +21,6 @@ export default function ProductCard({ id, price, image, name }) {
 
   function addTotalPrice() {
     const shoppingCart = JSON.parse(localStorage.getItem('shoppingCart')) || [];
-    // console.log(shoppingCart);
     const shoppingCartSome = shoppingCart.reduce(
       (acc, curr) => acc + curr.subTotal,
       0.00,
@@ -41,7 +39,6 @@ export default function ProductCard({ id, price, image, name }) {
   function incrementProduct() {
     setQuantidade(quantidade + 1);
     const productInfo = { id, name, price };
-    console.log(productInfo);
     incrementProductStorage(productInfo);
     addTotalPrice();
   }
@@ -98,8 +95,3 @@ ProductCard.propTypes = {
   image: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
 };
-
-// customer_products__img-card-bg-image-<id>
-// - 18: customer_products__button-card-add-item-<id>
-// - 19: customer_products__button-card-rm-item-<id>
-// - 20: customer_products__input-card-quantity-<id></id>
