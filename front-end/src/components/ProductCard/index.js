@@ -57,7 +57,7 @@ export default function ProductCard({ id, price, image, name }) {
     <main>
       <div>
         <p data-testid={ `customer_products__element-card-price-${id}` }>
-          {String(price).replace('.', ',')}
+          {String(price.toFixed(2)).replace('.', ',')}
         </p>
         <img
           id="image"
@@ -94,7 +94,7 @@ export default function ProductCard({ id, price, image, name }) {
 }
 ProductCard.propTypes = {
   id: PropTypes.number.isRequired,
-  price: PropTypes.string.isRequired,
+  price: PropTypes.number.isRequired,
   image: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
 };
