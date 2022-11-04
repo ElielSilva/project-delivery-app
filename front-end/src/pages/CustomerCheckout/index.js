@@ -4,12 +4,6 @@ import { requestData } from '../../services/fetchLogin';
 import SoldProductsTable from './table';
 import NavBar from '../../components/NavBar';
 
-const gambiarra = [
-  { name: 'vinho', quantity: 2, price: 49.50 },
-  { name: 'refri', quantity: 5, price: 10.20 },
-  { name: 'carne', quantity: 1, price: 26.98 },
-];
-
 export default function CustomerCheckout() {
   const [products, setProducts] = useState([]);
   const [employees, setEmployees] = useState([]);
@@ -31,10 +25,11 @@ export default function CustomerCheckout() {
 
   useEffect(() => {
     const cartItems = JSON.parse(localStorage.getItem('shoppingCart'));
-    setProducts(cartItems || gambiarra);
+    setProducts(cartItems || []);
   }, []);
 
   function finalizeOrder() {
+    console.log(products);
     console.log('finalizar compra', seller, products, deliveryAddress);
   }
 
