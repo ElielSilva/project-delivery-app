@@ -38,4 +38,9 @@ module.exports = {
 
     return { ...dataValues, sales };
   },
+
+  getAll: async ({ sellerId }) => {
+    const dataValues = await Sales.findAll({ where: { sellerId } });
+    return dataValues;
+  },
 };
