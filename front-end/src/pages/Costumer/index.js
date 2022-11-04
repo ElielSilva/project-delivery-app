@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
+
 import NavBar from '../../components/NavBar';
 import ProductCard from '../../components/ProductCard';
 import { requestData } from '../../services/fetchLogin';
+import Button from '../../components/Button';
 
 export default function Costumer() {
   const [products, setProducts] = useState([]);
@@ -9,7 +11,11 @@ export default function Costumer() {
   useEffect(() => {
     async function requestProduct() {
       const allProducts = await requestData('/customer/products');
-      setProducts(allProducts);
+      const newProduct = allProducts.map((product) => {
+        product.price = parseFloat(product.price);
+        return product;
+      });
+      setProducts(newProduct);
     }
     requestProduct();
   }, []);
@@ -28,6 +34,7 @@ export default function Costumer() {
           />
         ))
       }
+      <Button />
     </>
   );
 }

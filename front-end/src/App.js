@@ -1,6 +1,6 @@
 import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
-
+// import { ShoppingContext } from './context/ShoppingContext';
 import Costumer from './pages/Costumer';
 import Login from './pages/Login';
 import Register from './pages/Register';
