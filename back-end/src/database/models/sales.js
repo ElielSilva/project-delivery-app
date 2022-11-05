@@ -1,28 +1,39 @@
 module.exports = (sequelize, DataTypes) => {
   const Sales = sequelize.define('Sales', {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-    total_price: DataTypes.INTEGER,
-    delivery_address: DataTypes.STRING(255),
-    delivery_number: DataTypes.STRING(50),
-    sale_date: DataTypes.DATE,
-    status: DataTypes.STRING(50),
-    users_id: { type: DataTypes.INTEGER, foreignKey: true },
-    seller_id: { type: DataTypes.INTEGER, foreignKey: true },
+    userId: { type: DataTypes.INTEGER, foreignKey: true },
+    sellerId: { type: DataTypes.INTEGER, foreignKey: true },
+    totalPrice: DataTypes.INTEGER,
+    deliveryAddress: DataTypes.STRING(255),
+    deliveryNumber: DataTypes.STRING(50),
+    saleDate: {
+      type: DataTypes.DATE,
+      defaultValue: DataTypes.NOW,
+    },
+    status: {
+      type: DataTypes.STRING(50),
+      defaultValue: 'pending',
+    },
   },
   {
     timestamps: false,
     tableName: 'sales',
+    underscored: true,
   });
 
-  // Sales.associate = (models) => {
-  //   Sales.belongsTo(models.User,
-  //     { foreignKey: 'userId', as: 'users' });
-  // };
+  Sales.associate = (models) => {
+    Sales.belongsTo(models.Users,
+      { foreignKey: 'userId', as: 'user' }
+    );
 
-  // Sales.associate = (models) => {
-  //   Sales.belongsTo(models.User,
-  //     { foreignKey: 'saller_id', as: 'seller' });
-  // };
+    Sales.belongsTo(models.Users,
+      { foreignKey: 'sellerId', as: 'seller' }
+    );
+
+    Sales.hasMany(models.SalesProducts,
+      { foreignKey: 'saleId', as: 'sales' }
+    );
+  };
 
   return Sales;
 };

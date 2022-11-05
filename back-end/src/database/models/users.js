@@ -16,12 +16,12 @@ module.exports = (sequelize, DataTypes) => {
 
   User.associate = (models) => {
     User.hasMany(models.Sales,
-      { foreignKey: 'userId', as: 'user' });
-  };
+      { foreignKey: 'userId', as: 'user' },
+    );
 
-  User.associate = (models) => {
     User.hasMany(models.Sales,
-      { foreignKey: 'sellerId', as: 'seller' });
+      { foreignKey: 'sellerId', as: 'seller' },
+    );
   };
 
   return User;
