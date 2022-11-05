@@ -26,8 +26,6 @@ function Login() {
 
       const userData = await requestData('/login/validate');
 
-      // localStorage.setItem('token', token);
-      // localStorage.setItem('role', role);
       localStorage.setItem('user', JSON.stringify(userData));
 
       setIsLogged(true);
