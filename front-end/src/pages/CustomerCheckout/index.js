@@ -1,36 +1,44 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 // import { useNavigate, Navigate } from 'react-router-dom';
-import { requestData } from '../../services/fetchLogin';
 import SoldProductsTable from './table';
 import NavBar from '../../components/NavBar';
+import { ShoppingContext } from '../../context/ShoppingContext';
 
 export default function CustomerCheckout() {
   const [products, setProducts] = useState([]);
-  const [employees, setEmployees] = useState([]);
   const [deliveryAddress, setDeliveryAddress] = useState({ address: '', number: '' });
-  const [seller, setSeller] = useState();
+  const [seller, setSeller] = useState({ name: '', id: '' });
+
+  const { TotalPrice, setTotalPrice, employees, user } = useContext(ShoppingContext);
 
   useEffect(() => {
-    const setInitialState = async () => {
-      try {
-        const allEmployees = await requestData('/employees');
-        setEmployees(allEmployees);
-        setSeller(allEmployees[0].name);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    setInitialState();
-  }, []);
+    if (employees) {
+      const { name, userId } = employees[0];
+      setSeller({ name, id: userId });
+    }
+  }, [employees]);
 
   useEffect(() => {
     const cartItems = JSON.parse(localStorage.getItem('shoppingCart'));
     setProducts(cartItems || []);
-  }, []);
+
+    const totalPrice = cartItems
+      .reduce((acc, cv) => acc + (cv.price * cv.quantity), 0);
+
+    setTotalPrice(totalPrice);
+  }, [setTotalPrice]);
 
   function finalizeOrder() {
-    console.log(products);
-    console.log('finalizar compra', seller, products, deliveryAddress);
+    const { address, number } = deliveryAddress;
+
+    const BodyData = {
+      sellerId: seller,
+      totalPrice: TotalPrice,
+      deliveryAddress: address,
+      deliveryNumber: number,
+    };
+
+    console.log('finalizar compra', user, TotalPrice, BodyData);
   }
 
   return (
@@ -39,8 +47,13 @@ export default function CustomerCheckout() {
 
       <div>
         <h1>Finalizar Pedido</h1>
-        {products.length > 0
-          && <SoldProductsTable productsData={ products } />}
+        {
+          products.length > 0
+          && <SoldProductsTable
+            productsData={ products }
+            setProductsData={ setProducts }
+          />
+        }
       </div>
 
       <h3>Detalhes e Endereço para Entrega</h3>

@@ -1,25 +1,25 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import PropTypes from 'prop-types';
+import { ShoppingContext } from '../../context/ShoppingContext';
 
-export default function SoldProducts({ productsData }) {
+export default function SoldProducts({ productsData, setProductsData }) {
   const [total, setTotal] = useState();
-  const [products, setProducts] = useState([]);
+
+  const { TotalPrice, setTotalPrice } = useContext(ShoppingContext);
 
   useEffect(() => {
-    setProducts(productsData);
-  }, [productsData]);
+    const totalValue = productsData
+      .reduce((acc, cv) => acc + (cv.price * cv.quantity), 0);
 
-  useEffect(() => {
-    const totalValue = products
-      .reduce((acc, cv) => acc + (cv.price * cv.quantity), 0)
-      .toFixed(2);
-    setTotal(totalValue);
-  }, [products, productsData]);
+    const screenPrice = totalValue.toFixed(2).replace('.', ',');
+    setTotal(screenPrice);
+    setTotalPrice(totalValue);
+  }, [productsData, TotalPrice, setTotalPrice]);
 
   function removeItem(index) {
-    const newProducts = products.filter((_prod, i) => i !== index);
+    const newProducts = productsData.filter((_prod, i) => i !== index);
     localStorage.setItem('shoppingCart', JSON.stringify(newProducts));
-    setProducts(newProducts);
+    setProductsData(newProducts);
   }
 
   return (
@@ -36,7 +36,7 @@ export default function SoldProducts({ productsData }) {
           </tr>
         </thead>
         <tfoot>
-          {products.map(({ name, quantity, price }, i) => (
+          {productsData.map(({ name, quantity, price }, i) => (
             <tr key={ i }>
 
               <td
@@ -94,4 +94,5 @@ SoldProducts.propTypes = {
       price: PropTypes.number,
     }),
   ).isRequired,
+  setProductsData: PropTypes.func.isRequired,
 };
