@@ -5,10 +5,11 @@ export const ShoppingContext = createContext();
 
 export function ShoppingProvider(childrens) {
   const [TotalPrice, setTotalPrice] = useState(0.00);
+  const [sellerAllOrders, setSellerAllOrders] = useState([]);
   const { children } = childrens;
   const TotalPriceCart = useMemo(() => ({
-    TotalPrice, setTotalPrice,
-  }), [TotalPrice]);
+    TotalPrice, setTotalPrice, sellerAllOrders, setSellerAllOrders,
+  }), [TotalPrice, sellerAllOrders]);
 
   return (
     <ShoppingContext.Provider value={ TotalPriceCart }>

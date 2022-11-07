@@ -7,7 +7,7 @@ module.exports = {
   },
 
   getAll: async (req, res) => {
-    const sales = await salesService.getAll(req.body);
+    const sales = await salesService.getAll(req.id);
     res.status(200).json(sales);
   },
 };

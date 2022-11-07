@@ -10,7 +10,7 @@ function Login() {
   const [password, setPassword] = useState('');
   const [isLogged, setIsLogged] = useState(false);
   const [failedTryLogin, setFailedTryLogin] = useState(false);
-  // const [ loginSucess, setloginSucess ] = useState(true);
+  const [loginRole, setloginRole] = useState('');
   const navigate = useNavigate();
 
   const regex = /\S+@\S+\.\S+/;
@@ -25,6 +25,7 @@ function Login() {
       setToken(token);
 
       const userData = await requestData('/login/validate');
+      setloginRole(userData.role);
 
       localStorage.setItem('user', JSON.stringify(userData));
 
@@ -43,7 +44,15 @@ function Login() {
     navigate('/register');
   }
 
-  if (isLogged) return <Navigate to="/customer/products" />;
+  if (isLogged) {
+    if (loginRole === 'admistrator') {
+      return <Navigate to="/admin/maneger" />;
+    }
+    if (loginRole === 'seller') {
+      return <Navigate to="/seller/orders" />;
+    }
+    return <Navigate to="/customer/products" />;
+  }
 
   return (
     <main id="login">
