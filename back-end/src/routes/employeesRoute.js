@@ -3,6 +3,6 @@ const employeeController = require('../controllers/employeesController');
 
 const employeesRouter = Router();
 
-employeesRouter.get('/', employeeController.getEmployees);
+employeesRouter.get('/sellers', employeeController.getEmployees);
 
 module.exports = employeesRouter;
