@@ -17,6 +17,7 @@ function App() {
         <Route exact path="/customer/checkout" element={ <CustomerCheckout /> } />
         <Route exact path="/customer/products" element={ <Costumer /> } />
         <Route exact path="/seller/orders" element={ <SellerOrders /> } />
+        <Route exact path="/seller/orders/:id" element={ <h1>/seller/orders/:id</h1> } />
         <Route exact path="/" element={ <Navigate to="/login" replace /> } />
       </Routes>
     </div>

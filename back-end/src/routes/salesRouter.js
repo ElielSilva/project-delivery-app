@@ -5,6 +5,6 @@ const auth = require('../middlewares/auth');
 const salesRouter = Router();
 
 salesRouter.post('/orders', salesController.create);
-salesRouter.get('/sellers', auth,salesController.getAll);
+salesRouter.get('/sellers', auth, salesController.getAll);
 
 module.exports = salesRouter;

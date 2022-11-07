@@ -21,7 +21,7 @@ module.exports = {
 
   getAll: async (sellerId) => {
     const dataValues = await Sales.findAll(
-      { where: { sellerId } }
+      { where: { sellerId } },
     );
     return dataValues;
   },
