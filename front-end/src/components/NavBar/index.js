@@ -45,8 +45,3 @@ export default function NavBar() {
     </div>
   );
 }
-
-// NavBar.propTypes = {
-//   pedidos: PropTypes.number,
-//   nome: PropTypes.string,
-// };

@@ -5,6 +5,7 @@ import Costumer from './pages/Costumer';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import CustomerCheckout from './pages/CustomerCheckout';
+import './App.css';
 
 function App() {
   return (

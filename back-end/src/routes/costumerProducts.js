@@ -5,7 +5,7 @@ const costumerProductsRouter = express.Router();
 
 costumerProductsRouter.use(express.json());
 
-costumerProductsRouter.get('/', 
+costumerProductsRouter.get('/products', 
 (req, res) => { costumerProductsController(req, res); });
 
 module.exports = costumerProductsRouter;
