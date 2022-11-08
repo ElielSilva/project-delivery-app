@@ -1,7 +1,7 @@
 import React, { useEffect, useContext } from 'react';
 import NavBar from '../../components/NavBar';
 import Orders from '../../components/Orders';
-import { requestData } from '../../services/fetchLogin';
+import { requestData, setToken } from '../../services/fetchLogin';
 import { ShoppingContext } from '../../context/ShoppingContext';
 
 export default function SellerOrders() {
