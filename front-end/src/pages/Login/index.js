@@ -24,12 +24,8 @@ function Login() {
 
       setToken(token);
 
-<<<<<<< HEAD
-      const userData = await requestData('/login/validate');
-      setloginRole(userData.role);
-=======
       const userData = await getRequest('/login/validate');
->>>>>>> ada0bc139d292443b8d8f20334f5df13ef0f4441
+      setloginRole(userData.role);
 
       localStorage.setItem('user', JSON.stringify(userData));
 
@@ -49,8 +45,8 @@ function Login() {
   }
 
   if (isLogged) {
-    if (loginRole === 'admistrator') {
-      return <Navigate to="/admin/maneger" />;
+    if (loginRole === 'administrator') {
+      return <Navigate to="/admin/manage" />;
     }
     if (loginRole === 'seller') {
       return <Navigate to="/seller/orders" />;
@@ -118,9 +114,3 @@ function Login() {
 }
 
 export default Login;
-
-// fulana@deliveryapp.com
-// fulana@123
-// common_login__button-login
-// common_login__button-register
-// common_login__element-invalid-email

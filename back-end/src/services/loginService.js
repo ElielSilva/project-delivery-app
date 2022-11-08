@@ -10,7 +10,7 @@ const login = async (email, password) => {
   const passwordHash = encriptPassword(password);
   if (passwordHash !== user.password) throw errorMessage;
 
-  const token = generateToken({ id: user.id, name: user.name, email: user.email });
+  const token = generateToken({ id: user.id, name: user.name, email: user.email, role: user.role });
 
   return token;
 };

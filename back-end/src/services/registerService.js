@@ -29,6 +29,24 @@ const create = async (body) => {
   };
 };
 
+const createWithAdm = async (body) => {
+  const { name, password, email } = body;
+  const passwordHash = md5(password);
+  joiValidate(body, registerSchema);
+  const userExist = await Users.findAll({ where: { name, email } });
+  if (userExist[0]) throw errorMessage; 
+
+  const bodyWithEncript = {
+    ...body,
+    password: passwordHash,
+  };
+  const user = await Users.create(bodyWithEncript);
+  if (!user) throw errorMessage;
+
+  return;
+};
+
 module.exports = {
   create,
+  createWithAdm,
 };
