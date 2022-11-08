@@ -10,7 +10,7 @@ module.exports = (req, res, next) => {
     if (!authorization) return res.status(401).json({ message: 'Token not found' });
     const x = jwt.verify(authorization, jwtKey);
     if (x.role !== 'administrator') {
-      return res.status(401).json({ message: 'User not authorized' })
+      return res.status(401).json({ message: 'User not authorized' });
     }
     next();
   } catch (error) {

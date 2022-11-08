@@ -42,8 +42,6 @@ const createWithAdm = async (body) => {
   };
   const user = await Users.create(bodyWithEncript);
   if (!user) throw errorMessage;
-
-  return;
 };
 
 module.exports = {
