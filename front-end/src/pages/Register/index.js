@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
-import { requestLogin } from '../../services/fetchLogin';
+import { postRequest } from '../../services/request';
 
 export default function Register() {
   const [name, setName] = useState('');
@@ -18,7 +18,7 @@ export default function Register() {
       const bodyRequestCreate = {
         name, email, password, role: 'customer',
       };
-      const userData = await requestLogin('/register', bodyRequestCreate);
+      const userData = await postRequest('/register', bodyRequestCreate);
 
       localStorage.setItem('user', JSON.stringify(userData));
 

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Navigate } from 'react-router-dom';
-import { requestLogin, setToken, requestData } from '../../services/fetchLogin';
+import { postRequest, setToken, getRequest } from '../../services/request';
 
 // import cooking from '../../images/cooking.png';
 // import './styles.scss';
@@ -20,12 +20,16 @@ function Login() {
     event.preventDefault();
 
     try {
-      const { token } = await requestLogin('/login', { email, password });
+      const { token } = await postRequest('/login', { email, password });
 
       setToken(token);
 
+<<<<<<< HEAD
       const userData = await requestData('/login/validate');
       setloginRole(userData.role);
+=======
+      const userData = await getRequest('/login/validate');
+>>>>>>> ada0bc139d292443b8d8f20334f5df13ef0f4441
 
       localStorage.setItem('user', JSON.stringify(userData));
 

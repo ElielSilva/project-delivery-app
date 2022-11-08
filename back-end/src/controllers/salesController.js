@@ -6,8 +6,14 @@ module.exports = {
     res.status(201).json(newSale);
   },
 
-  getAll: async (req, res) => {
-    const sales = await salesService.getAll(req.id);
-    res.status(200).json(sales);
+  getBySellerId: async (req, res) => {
+    const sellerOrders = await salesService.getBySellerId(req.body);
+    res.status(200).json(sellerOrders);
+  },
+
+  getById: async (req, res) => {
+    const { id } = req.params;
+    const salesFromId = await salesService.getById(id);
+    res.status(200).json(salesFromId);
   },
 };

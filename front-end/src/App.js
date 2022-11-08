@@ -7,6 +7,8 @@ import Register from './pages/Register';
 import CustomerCheckout from './pages/CustomerCheckout';
 import SellerOrders from './pages/SellerOrders';
 import OrdersDetails from './pages/OrdersDetails';
+import Orders from './pages/Orders';
+import './App.css';
 
 function App() {
   return (
@@ -19,6 +21,7 @@ function App() {
         <Route exact path="/customer/products" element={ <Costumer /> } />
         <Route exact path="/seller/orders" element={ <SellerOrders /> } />
         <Route exact path="/seller/orders/:id" element={ <OrdersDetails /> } />
+        <Route exact path="/customer/orders/:id" element={ <Orders /> } />
         <Route exact path="/" element={ <Navigate to="/login" replace /> } />
       </Routes>
     </div>
