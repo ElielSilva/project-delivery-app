@@ -8,6 +8,12 @@ const registerController = async (req, res) => {
   res.status(201).json(token);
 };
 
+const registerControllerWithAdm = async (req, res) => {
+  await registerService.createWithAdm(req.body);
+  res.status(201).json();
+};
+
 module.exports = {
   registerController,
+  registerControllerWithAdm,
 };

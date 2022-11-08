@@ -5,6 +5,7 @@ import Costumer from './pages/Costumer';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import CustomerCheckout from './pages/CustomerCheckout';
+import AdminManager from './pages/AdminManager';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route exact path="/customer" element={ <Costumer /> } />
         <Route exact path="/customer/checkout" element={ <CustomerCheckout /> } />
         <Route exact path="/customer/products" element={ <Costumer /> } />
+        <Route exact path="/admin/manage" element={ <AdminManager /> } />
         <Route exact path="/" element={ <Navigate to="/login" replace /> } />
       </Routes>
     </div>
