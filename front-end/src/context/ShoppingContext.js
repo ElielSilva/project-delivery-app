@@ -1,5 +1,5 @@
 import React, { createContext, useState, useMemo, useEffect } from 'react';
-import { requestData } from '../services/fetchLogin';
+import { getRequest } from '../services/request';
 // import PropTypes from 'prop-types';
 
 export const ShoppingContext = createContext();
@@ -14,7 +14,7 @@ export function ShoppingProvider(childrens) {
   useEffect(() => {
     const setInitialState = async () => {
       try {
-        const allEmployees = await requestData('/employees');
+        const allEmployees = await getRequest('/employees/sellers');
         setEmployees(allEmployees);
       } catch (err) {
         console.log(err);

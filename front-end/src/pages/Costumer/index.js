@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 import NavBar from '../../components/NavBar';
 import ProductCard from '../../components/ProductCard';
-import { requestData } from '../../services/fetchLogin';
+import { getRequest } from '../../services/request';
 import Button from '../../components/Button';
 
 export default function Costumer() {
@@ -10,7 +10,7 @@ export default function Costumer() {
 
   useEffect(() => {
     async function requestProduct() {
-      const allProducts = await requestData('/customer/products');
+      const allProducts = await getRequest('/products');
       const newProduct = allProducts.map((product) => {
         product.price = parseFloat(product.price);
         return product;

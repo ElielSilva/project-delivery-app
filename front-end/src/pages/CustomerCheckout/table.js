@@ -56,11 +56,11 @@ export default function SoldProducts({ productsData, setProductsData }) {
               <td
                 data-testid={ `customer_checkout__element-order-table-unit-price-${i}` }
               >
-                { price.toFixed(2) }
+                { price.toFixed(2).replace('.', ',') }
               </td>
 
               <td data-testid={ `customer_checkout__element-order-table-sub-total-${i}` }>
-                { `R$ ${(quantity * price).toFixed(2)}` }
+                { `R$ ${(quantity * price).toFixed(2).replace('.', ',')}` }
               </td>
 
               <td data-testid={ `customer_checkout__element-order-table-remove-${i}` }>
