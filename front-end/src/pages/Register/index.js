@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Navigate } from 'react-router-dom';
 import { postRequest } from '../../services/request';
+import { ShoppingContext } from '../../context/ShoppingContext';
 
 export default function Register() {
   const [name, setName] = useState('');
@@ -8,6 +9,8 @@ export default function Register() {
   const [password, setPassword] = useState('');
   const [isLogged, setIsLogged] = useState(false);
   const [FailedTryCreate, setFailedTryCreate] = useState(false);
+
+  const { setUser } = useContext(ShoppingContext);
 
   const minPassword = 6;
   const minName = 12;
@@ -21,6 +24,7 @@ export default function Register() {
       const userData = await postRequest('/register', bodyRequestCreate);
 
       localStorage.setItem('user', JSON.stringify(userData));
+      setUser(userData);
 
       setIsLogged(true);
     } catch (error) {

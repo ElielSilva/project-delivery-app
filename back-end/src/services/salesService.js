@@ -1,4 +1,4 @@
-const { SalesProducts, Sales, Products } = require('../database/models');
+const { sales_products: SalesProducts, Sales, Products } = require('../database/models');
 
 module.exports = {
   create: async (saleData) => {

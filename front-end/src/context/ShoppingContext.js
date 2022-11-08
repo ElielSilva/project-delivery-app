@@ -22,11 +22,12 @@ export function ShoppingProvider(childrens) {
     };
     setInitialState();
     const currentUser = JSON.parse(localStorage.getItem('user'));
+    console.log({ currentUser });
     setUser(currentUser);
   }, []);
 
   const TotalPriceCart = useMemo(() => ({
-    TotalPrice, setTotalPrice, employees, user,
+    TotalPrice, setTotalPrice, employees, user, setUser,
   }), [TotalPrice, employees, user]);
 
   return (
