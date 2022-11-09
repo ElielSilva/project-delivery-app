@@ -12,13 +12,13 @@ module.exports = {
     const { dataValues } = await Sales.create({
       userId, sellerId, totalPrice, deliveryAddress, deliveryNumber });
 
-    await sales.forEach(({ productId, quantity }) => {
+    await Promise.all(sales.map(({ productId, quantity }) => 
       SalesProducts.create({
         saleId: dataValues.id,
         productId,
         quantity,
-      });
-    });
+      })
+    ));
 
     return { ...dataValues, sales };
   },
