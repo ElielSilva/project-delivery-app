@@ -35,7 +35,7 @@ export default function HeaderTable({ productsData }) {
           </tr>
         </thead>
         <tfoot>
-          {products.map(({ name, quantity, price }, i) => (
+          {products.map(({ name, sales_products: { quantity }, price }, i) => (
             <tr key={ i }>
 
               <td
