@@ -1,5 +1,9 @@
 const { sales_products: SalesProducts, Sales, Products } = require('../database/models');
 
+const err = {
+  orderNotFound: { status: 404, message: 'Order not found' }
+}
+
 module.exports = {
   create: async (saleData) => {
     const { userId, sellerId, totalPrice, deliveryAddress,
@@ -28,10 +32,16 @@ module.exports = {
   },
 
   getById: async (id) => {
-    const dataValues = await Sales.findAll({
+    const dataValues = await Sales.findOne({
       where: { id },
-      include: { model: Products, as: 'products' },
+      include: { model: Products,
+        as: 'products',
+        attributes:['id', 'name', 'price'],
+        through: { attributes: ['saleId', 'quantity'], as: 'salesProducts' }
+      },
+      
     });
+    if (!dataValues) throw err.orderNotFound;
     return dataValues;
   },
 };
