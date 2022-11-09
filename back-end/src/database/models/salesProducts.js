@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-  const SalesProducts = sequelize.define('SalesProducts',
+  const SalesProducts = sequelize.define('sales_products',
     {
       saleId: {
         type: DataTypes.INTEGER,
@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
     {
       timestamps: false,
       underscored: true, 
-      tableName: 'salesProducts'
+      tableName: 'sales_products'
     },
   );
 

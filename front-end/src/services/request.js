@@ -8,20 +8,19 @@ export const setToken = (token) => {
   api.defaults.headers.common.Authorization = token;
 };
 
-export const requestData = async (endpoint) => {
+export const getRequest = async (endpoint) => {
   const { data } = await api.get(endpoint);
 
   return data;
 };
 
-export const requestLogin = async (endpoint, body) => {
+export const postRequest = async (endpoint, body) => {
   const { data } = await api.post(endpoint, body);
   return data;
 };
 
-// export const requestRegister = async (endpoint, body) => {
-//   const { data } = await api.post(endpoint, body);
-//   // console.log(data);
+// export const requestSellerOrders = async (endpoint) => {
+//   const { data } = await api.post(endpoint);
 //   return data;
 // };
 

@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { ShoppingContext } from '../../context/ShoppingContext';
 // import { PropTypes } from 'prop-types';
 
 export default function NavBar() {
   const [name, setName] = useState('');
+  const { setTotalPrice } = useContext(ShoppingContext);
 
   const navigate = useNavigate();
 
@@ -13,18 +15,43 @@ export default function NavBar() {
   }, []);
 
   function btnQuit() {
+    setTotalPrice(0);
     localStorage.clear();
-    navigate('/');
+    navigate('/login');
+  }
+
+  function btnProducts() {
+    navigate('/customer/products');
+  }
+
+  function btnCustomerCheckout() {
+    navigate('/customer/checkout');
   }
 
   return (
     <div>
       <div>
-        <p data-testid="customer_products__element-navbar-link-products">Produtos</p>
+        <p>
+          <button
+            type="button"
+            // label="sair"
+            data-testid="customer_products__element-navbar-link-products"
+            onClick={ () => btnProducts() }
+          >
+            Produtos
+          </button>
+        </p>
       </div>
       <div>
-        <p data-testid="customer_products__element-navbar-link-orders">
-          Meus Pedidos
+        <p>
+          <button
+            type="button"
+            // label="sair"
+            data-testid="customer_products__element-navbar-link-orders"
+            onClick={ () => btnCustomerCheckout() }
+          >
+            Meus Pedidos
+          </button>
         </p>
       </div>
       <div>
@@ -35,7 +62,7 @@ export default function NavBar() {
       <div>
         <button
           type="button"
-          label="sair"
+          // label="sair"
           data-testid="customer_products__element-navbar-link-logout"
           onClick={ () => btnQuit() }
         >

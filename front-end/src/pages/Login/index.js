@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate, Navigate } from 'react-router-dom';
-import { requestLogin, setToken, requestData } from '../../services/fetchLogin';
+import { postRequest, setToken, getRequest } from '../../services/request';
+import { ShoppingContext } from '../../context/ShoppingContext';
 
 // import cooking from '../../images/cooking.png';
 // import './styles.scss';
@@ -10,8 +11,9 @@ function Login() {
   const [password, setPassword] = useState('');
   const [isLogged, setIsLogged] = useState(false);
   const [failedTryLogin, setFailedTryLogin] = useState(false);
-  // const [ loginSucess, setloginSucess ] = useState(true);
+  const [loginRole, setloginRole] = useState('');
   const navigate = useNavigate();
+  const { setUser } = useContext(ShoppingContext);
 
   const regex = /\S+@\S+\.\S+/;
   const minPassword = 6;
@@ -20,15 +22,15 @@ function Login() {
     event.preventDefault();
 
     try {
-      const { token } = await requestLogin('/login', { email, password });
+      const { token } = await postRequest('/login', { email, password });
 
       setToken(token);
 
-      const userData = await requestData('/login/validate');
+      const userData = await getRequest('/login/validate');
+      setloginRole(userData.role);
 
-      // localStorage.setItem('token', token);
-      // localStorage.setItem('role', role);
       localStorage.setItem('user', JSON.stringify(userData));
+      setUser(userData);
 
       setIsLogged(true);
     } catch (error) {
@@ -45,7 +47,15 @@ function Login() {
     navigate('/register');
   }
 
-  if (isLogged) return <Navigate to="/customer/products" />;
+  if (isLogged) {
+    if (loginRole === 'administrator') {
+      return <Navigate to="/admin/manage" />;
+    }
+    if (loginRole === 'seller') {
+      return <Navigate to="/seller/orders" />;
+    }
+    return <Navigate to="/customer/products" />;
+  }
 
   return (
     <main id="login">
@@ -107,9 +117,3 @@ function Login() {
 }
 
 export default Login;
-
-// fulana@deliveryapp.com
-// fulana@123
-// common_login__button-login
-// common_login__button-register
-// common_login__element-invalid-email

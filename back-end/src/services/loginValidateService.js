@@ -5,6 +5,7 @@ const loginValidate = async (data) => {
   const userExists = await Users.findByPk(data.id);
   if (!userExists) throw errorMessage;
   return {
+    id: userExists.id,
     name: userExists.name, 
     email: userExists.email,
     role: userExists.role,
