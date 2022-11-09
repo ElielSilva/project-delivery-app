@@ -8,7 +8,7 @@ module.exports = {
         allowNull: false,
       },
       totalPrice: {
-        type: Sequelize.DECIMAL(9,2),
+        type: Sequelize.FLOAT(10,2),
         allowNull: false,
         field: 'total_price',
       },

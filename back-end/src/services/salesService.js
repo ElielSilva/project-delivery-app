@@ -19,9 +19,17 @@ module.exports = {
     return { ...dataValues, sales };
   },
 
-  getBySellerId: async (sellerId) => {
+  getBySellerIdOrders: async (sellerId) => {
     const dataValues = await Sales.findAll({
       where: { sellerId },
+      include: { model: Products, as: 'products' },
+    });
+    return dataValues;
+  },
+
+  getBySellerId: async (sellerId, saleId) => {
+    const dataValues = await Sales.findAll({
+      where: { sellerId, id: saleId },
       include: { model: Products, as: 'products' },
     });
     return dataValues;
