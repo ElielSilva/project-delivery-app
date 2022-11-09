@@ -44,6 +44,23 @@ function Login() {
     setFailedTryLogin(false);
   }, [email, password]);
 
+  useEffect(() => {
+    async function tokenVerify(token) {
+      try {
+        setToken(token);
+        const userData = await getRequest('/login/validate');
+        if (userData) {
+          localStorage.setItem('user', JSON.stringify(userData));
+          navigate('/customer/products');
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    }
+    const logUser = JSON.parse(localStorage.getItem('user'));
+    if (logUser) tokenVerify(logUser.token);
+  }, [navigate]);
+
   function btnResgister() {
     navigate('/register');
   }

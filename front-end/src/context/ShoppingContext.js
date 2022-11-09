@@ -22,7 +22,6 @@ export function ShoppingProvider(childrens) {
     };
     setInitialState();
     const currentUser = JSON.parse(localStorage.getItem('user'));
-    console.log({ currentUser });
     setUser(currentUser);
   }, []);
 

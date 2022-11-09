@@ -5,7 +5,8 @@ import Costumer from './pages/Costumer';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import CustomerCheckout from './pages/CustomerCheckout';
-import Orders from './pages/Orders';
+import OrderDetail from './pages/OrderDetail';
+import CustomerOrders from './pages/CustomerOrders';
 import './App.css';
 
 function App() {
@@ -17,7 +18,8 @@ function App() {
         <Route exact path="/customer" element={ <Costumer /> } />
         <Route exact path="/customer/checkout" element={ <CustomerCheckout /> } />
         <Route exact path="/customer/products" element={ <Costumer /> } />
-        <Route exact path="/customer/orders/:id" element={ <Orders /> } />
+        <Route path="/customer/orders/:id" element={ <OrderDetail /> } />
+        <Route exact path="/customer/orders" element={ <CustomerOrders /> } />
         <Route exact path="/" element={ <Navigate to="/login" replace /> } />
       </Routes>
     </div>
