@@ -6,13 +6,10 @@ export const ShoppingContext = createContext();
 
 export function ShoppingProvider(childrens) {
   const [TotalPrice, setTotalPrice] = useState(0.00);
-<<<<<<< HEAD
   const [sellerAllOrders, setSellerAllOrders] = useState([]);
-=======
   const [employees, setEmployees] = useState([{ name: '', userId: '' }]);
   const [user, setUser] = useState({});
 
->>>>>>> ada0bc139d292443b8d8f20334f5df13ef0f4441
   const { children } = childrens;
 
   useEffect(() => {
@@ -26,17 +23,23 @@ export function ShoppingProvider(childrens) {
     };
     setInitialState();
     const currentUser = JSON.parse(localStorage.getItem('user'));
+    // console.log({ currentUser });
     setUser(currentUser);
   }, []);
 
   const TotalPriceCart = useMemo(() => ({
-<<<<<<< HEAD
-    TotalPrice, setTotalPrice, sellerAllOrders, setSellerAllOrders,
-  }), [TotalPrice, sellerAllOrders]);
-=======
-    TotalPrice, setTotalPrice, employees, user,
-  }), [TotalPrice, employees, user]);
->>>>>>> ada0bc139d292443b8d8f20334f5df13ef0f4441
+    TotalPrice,
+    setTotalPrice,
+    sellerAllOrders,
+    setSellerAllOrders,
+    employees,
+    user,
+    setUser,
+  }), [TotalPrice, sellerAllOrders, user, employees]);
+    // TotalPrice, setTotalPrice, employees, user,
+
+  //   TotalPrice, setTotalPrice, employees, user, setUser,
+  // }), [TotalPrice, employees, user]);
 
   return (
     <ShoppingContext.Provider value={ TotalPriceCart }>

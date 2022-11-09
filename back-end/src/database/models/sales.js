@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     status: {
       type: DataTypes.STRING(50),
-      defaultValue: 'pending',
+      defaultValue: 'Pendente',
     },
   },
   {
@@ -30,7 +30,7 @@ module.exports = (sequelize, DataTypes) => {
       { foreignKey: 'sellerId', as: 'seller' }
     );
 
-    Sales.hasMany(models.SalesProducts,
+    Sales.hasMany(models.sales_products,
       { foreignKey: 'saleId', as: 'sales' }
     );
   };

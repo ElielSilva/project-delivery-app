@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import NavBar from '../../components/NavBar';
 import { getRequest } from '../../services/request';
 
 export default function Orders() {
@@ -17,6 +18,7 @@ export default function Orders() {
 
   return (
     <div>
+      <NavBar />
       {console.log(order)}
       <h1>{`Order: ${orderId}`}</h1>
     </div>

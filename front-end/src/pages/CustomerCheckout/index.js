@@ -41,11 +41,12 @@ export default function CustomerCheckout() {
   }
 
   async function btnSubmitOrder() {
+    console.log(seller);
     const { address, number } = deliveryAddress;
     const sales = products.map(({ id, quantity }) => (
       { productId: id, quantity }
     ));
-
+    console.log({ seller });
     const BodyData = {
       userId: user.id,
       sellerId: seller.id,
@@ -57,6 +58,14 @@ export default function CustomerCheckout() {
 
     const orderData = await postRequest('/sales/orders', BodyData);
     navigate(`/customer/orders/${orderData.id}`);
+  }
+
+  function handleSeller(empId) {
+    const employeeData = employees.filter((e) => e.id === Number(empId));
+    setSeller({
+      name: employeeData.name,
+      id: employeeData.id,
+    });
   }
 
   return (
@@ -89,10 +98,16 @@ export default function CustomerCheckout() {
             data-testid="customer_checkout__select-seller"
             name="employee"
             id="employee"
-            onChange={ ({ target }) => setSeller(target.value) }
+            onClick={ ({ target }) => {
+              console.log(target.value);
+              handleSeller(target.value);
+            } }
           >
-            { employees.map(({ name }, i) => (
-              <option key={ i } value={ name }>
+            { employees.map(({ name, id }, i) => (
+              <option
+                key={ i }
+                value={ id }
+              >
                 { name }
               </option>
             )) }

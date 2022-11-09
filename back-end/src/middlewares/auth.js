@@ -12,7 +12,7 @@ module.exports = (req, res, next) => {
     const x = jwt.verify(authorization, jwtKey);
     
     req.id = x.id;
-    req.role = x.role;
+    // req.role = x.role;
     next();
   } catch (error) {
     res.status(401).json({ message: 'Expired or invalid token' });

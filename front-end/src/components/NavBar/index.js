@@ -17,7 +17,7 @@ export default function NavBar() {
   function btnQuit() {
     setTotalPrice(0);
     localStorage.clear();
-    navigate('/');
+    navigate('/login');
   }
 
   function btnProducts() {
@@ -31,11 +31,11 @@ export default function NavBar() {
   return (
     <div>
       <div>
-        <p data-testid="customer_products__element-navbar-link-products">
+        <p>
           <button
             type="button"
-            label="sair"
-            data-testid="customer_products__element-navbar-link-logout"
+            // label="sair"
+            data-testid="customer_products__element-navbar-link-products"
             onClick={ () => btnProducts() }
           >
             Produtos
@@ -43,11 +43,11 @@ export default function NavBar() {
         </p>
       </div>
       <div>
-        <p data-testid="customer_products__element-navbar-link-orders">
+        <p>
           <button
             type="button"
-            label="sair"
-            data-testid="customer_products__element-navbar-link-logout"
+            // label="sair"
+            data-testid="customer_products__element-navbar-link-orders"
             onClick={ () => btnCustomerCheckout() }
           >
             Meus Pedidos
@@ -62,7 +62,7 @@ export default function NavBar() {
       <div>
         <button
           type="button"
-          label="sair"
+          // label="sair"
           data-testid="customer_products__element-navbar-link-logout"
           onClick={ () => btnQuit() }
         >

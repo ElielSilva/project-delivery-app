@@ -7,7 +7,7 @@ export default function Orders({ id, status, saleDate, totalPrice, deliveryAddre
   // console.log(x);
 
   return (
-    <Link to={ `/seller/orders/:${id}` }>
+    <Link to={ `/seller/orders/${id}` }>
       <main>
         <p data-testid={ `seller_orders__element-order-id-${id}` }>{id}</p>
         <button

@@ -1,7 +1,7 @@
 import React, { useEffect, useContext } from 'react';
 import NavBar from '../../components/NavBar';
 import Orders from '../../components/Orders';
-import { requestData, setToken } from '../../services/fetchLogin';
+import { getRequest, setToken } from '../../services/request';
 import { ShoppingContext } from '../../context/ShoppingContext';
 
 export default function SellerOrders() {
@@ -9,9 +9,10 @@ export default function SellerOrders() {
 
   useEffect(() => {
     async function requestOrders() {
-      const data = await requestData('/sales/sellers');
       const { token } = JSON.parse(localStorage.getItem('user'));
+      // console.log(token);
       setToken(token);
+      const data = await getRequest('/sales/sellers');
       setSellerAllOrders(data);
     }
     requestOrders();

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { requestLogin } from '../../services/fetchLogin';
+import { postRequest } from '../../services/request';
 
 const emailRegex = /\S+@\S+\.\S+/;
 const minName = 12;
@@ -17,7 +17,7 @@ export default function AdminManager() {
       const bodyRequestCreate = {
         name: personName, email, password, role,
       };
-      await requestLogin('/admin/manage', bodyRequestCreate);
+      await postRequest('/admin/manage', bodyRequestCreate);
     } catch (error) {
       setFailed(true);
     }

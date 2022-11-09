@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate, Navigate } from 'react-router-dom';
 import { postRequest, setToken, getRequest } from '../../services/request';
+import { ShoppingContext } from '../../context/ShoppingContext';
 
 // import cooking from '../../images/cooking.png';
 // import './styles.scss';
@@ -12,6 +13,7 @@ function Login() {
   const [failedTryLogin, setFailedTryLogin] = useState(false);
   const [loginRole, setloginRole] = useState('');
   const navigate = useNavigate();
+  const { setUser } = useContext(ShoppingContext);
 
   const regex = /\S+@\S+\.\S+/;
   const minPassword = 6;
@@ -28,6 +30,7 @@ function Login() {
       setloginRole(userData.role);
 
       localStorage.setItem('user', JSON.stringify(userData));
+      setUser(userData);
 
       setIsLogged(true);
     } catch (error) {

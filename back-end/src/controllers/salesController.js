@@ -7,7 +7,7 @@ module.exports = {
   },
 
   getBySellerId: async (req, res) => {
-    const sellerOrders = await salesService.getBySellerId(req.body);
+    const sellerOrders = await salesService.getBySellerId(req.id);
     res.status(200).json(sellerOrders);
   },
 
