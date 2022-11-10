@@ -1,8 +1,8 @@
 const { sales_products: SalesProducts, Sales, Products } = require('../database/models');
 
 const err = {
-  orderNotFound: { status: 404, message: 'Order not found' }
-}
+  orderNotFound: { status: 404, message: 'Order not found' },
+};
 
 module.exports = {
   create: async (saleData) => {
@@ -12,13 +12,13 @@ module.exports = {
     const { dataValues } = await Sales.create({
       userId, sellerId, totalPrice, deliveryAddress, deliveryNumber });
 
-    await Promise.all(sales.map(({ productId, quantity }) => 
+    await Promise.all(sales.map(({ productId, quantity }) => (
       SalesProducts.create({
         saleId: dataValues.id,
         productId,
         quantity,
       })
-    ));
+    )));
 
     return { ...dataValues, sales };
   },
@@ -44,8 +44,8 @@ module.exports = {
       where: { id },
       include: { model: Products,
         as: 'products',
-        attributes:['id', 'name', 'price'],
-        through: { attributes: ['saleId', 'quantity'], as: 'salesProducts' }
+        attributes: ['id', 'name', 'price'],
+        through: { attributes: ['saleId', 'quantity'], as: 'salesProducts' },
       },
       
     });
@@ -55,11 +55,11 @@ module.exports = {
 
   statusUpdate: async ({ id, newStatus }) => {
     console.log('sales service', id, newStatus);
-    const status = newStatus === 'emtransito'? 'Em transito' : newStatus;
+    const status = newStatus === 'emtransito' ? 'Em transito' : newStatus;
     const dataValues = await Sales.update({
-      status
+      status,
       }, {
-        where: { id }
+        where: { id },
       });
     if (!dataValues) throw err.orderNotFound;
     return dataValues;

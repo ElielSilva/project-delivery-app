@@ -5,9 +5,10 @@ module.exports = {
     const dataValues = await Sales.findAll({ 
       where: { userId },
       include: {
-        model: Products, as: 'products',
-        attributes:['id', 'name', 'price'],
-        through: { attributes: ['saleId', 'quantity'], as: 'salesProducts' }
+        model: Products,
+        as: 'products',
+        attributes: ['id', 'name', 'price'],
+        through: { attributes: ['saleId', 'quantity'], as: 'salesProducts' },
       },
     });
     return dataValues;
