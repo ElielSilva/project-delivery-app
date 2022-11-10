@@ -6,8 +6,8 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import CustomerCheckout from './pages/CustomerCheckout';
 import SellerOrders from './pages/SellerOrders';
-import OrdersDetails from './pages/OrdersDetails';
-import Orders from './pages/Orders';
+import OrdersDetails from './pages/OrdersDetailsSeller';
+import Orders from './pages/OrdersSeller';
 import './App.css';
 import AdminManager from './pages/AdminManager';
 

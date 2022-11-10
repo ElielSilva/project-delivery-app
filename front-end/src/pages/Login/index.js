@@ -43,6 +43,13 @@ function Login() {
     setFailedTryLogin(false);
   }, [email, password]);
 
+  // useEffect(() => {
+  //   const {token} = JSON.parse(localStorage.getItem('user'))
+  //   setToken(token);
+  //   const userData = await getRequest('/login/validate');
+  //   if (userData) Navigate("./customer/products")
+  // }, []);
+
   function btnResgister() {
     navigate('/register');
   }

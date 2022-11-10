@@ -1,33 +1,42 @@
 import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import NavBar from '../../components/NavBar';
-import HeaderTable from '../../components/HeaderTable';
+import OrdersDetailsTable from '../../components/OrdersDetailsTable';
 import HeaderOrdersDetails from '../../components/HeaderOrdersDetails';
 import { getRequest, setToken } from '../../services/request';
 
 export default function OrdersDetails() {
-  const [userData, setUserData] = useState({});
+  const [userData, setUserData] = useState();
+  const { id } = useParams();
+  // console.log('id do use params == ', id);
 
   useEffect(() => {
     async function getDetailsProducts() {
       const { token } = JSON.parse(localStorage.getItem('user'));
+      // console.log(token);
       setToken(token);
-      const data = await getRequest('/sales/sellers');
-      console.log(data);
+      const [data] = await getRequest(`/sales/sellers/${id}`);
+      // console.log('data === id ', data.id, data.status, data.saleDate);
       setUserData(data);
+      // console.log('data === state ', userData.id);
     }
     getDetailsProducts();
-  }, []);
-
+    // console.log('data === state ', userData.id);
+  }, [id]);
+  // console.log(userData.id);
   return (
     <main>
       <NavBar />
-      <HeaderOrdersDetails
-        id={ userData.id }
+      {userData && <HeaderOrdersDetails
+        saleId={ userData.id }
         status={ userData.status }
         saleDate={ userData.saleDate }
-      />
-      {userData.products.length > 0
-        && <HeaderTable productsData={ userData.products } />}
+      />}
+      {userData && userData.products.length > 0
+        && <OrdersDetailsTable
+          productsData={ userData.products }
+          totalPrice={ userData.totalPrice }
+        />}
     </main>
   );
 }
@@ -37,28 +46,3 @@ export default function OrdersDetails() {
 // - 55: seller_order_details__element-order-details-label-order-date
 // - 56: seller_order_details__button-preparing-check
 // - 57: seller_order_details__button-dispatch-check
-
-// const userData = {
-//   id: 1,
-//   userId: 3,
-//   sellerId: 2,
-//   totalPrice: '11.90',
-//   deliveryAddress: 'rua do fim, bairo nova vida, numero 7',
-//   deliveryNumber: '(99) 99999-9999',
-//   saleDate: '2002-10-15',
-//   status: 'pending',
-//   products: [
-//     {
-//       item: 1,
-//       name: 'skol 250ml',
-//       quantity: 2,
-//       price: 2.20,
-//     },
-//     {
-//       item: 1,
-//       name: 'skol 250ml',
-//       quantity: 2,
-//       price: 2.20,
-//     },
-//   ],
-// };
