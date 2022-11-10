@@ -6,6 +6,7 @@ export const ShoppingContext = createContext();
 
 export function ShoppingProvider(childrens) {
   const [TotalPrice, setTotalPrice] = useState(0.00);
+  const [sellerAllOrders, setSellerAllOrders] = useState([]);
   const [employees, setEmployees] = useState([{ name: '', userId: '' }]);
   const [user, setUser] = useState();
 
@@ -26,8 +27,18 @@ export function ShoppingProvider(childrens) {
   }, []);
 
   const TotalPriceCart = useMemo(() => ({
-    TotalPrice, setTotalPrice, employees, user, setUser,
-  }), [TotalPrice, employees, user]);
+    TotalPrice,
+    setTotalPrice,
+    sellerAllOrders,
+    setSellerAllOrders,
+    employees,
+    user,
+    setUser,
+  }), [TotalPrice, sellerAllOrders, user, employees]);
+    // TotalPrice, setTotalPrice, employees, user,
+
+  //   TotalPrice, setTotalPrice, employees, user, setUser,
+  // }), [TotalPrice, employees, user]);
 
   return (
     <ShoppingContext.Provider value={ TotalPriceCart }>

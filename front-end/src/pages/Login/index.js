@@ -11,7 +11,7 @@ function Login() {
   const [password, setPassword] = useState('');
   const [isLogged, setIsLogged] = useState(false);
   const [failedTryLogin, setFailedTryLogin] = useState(false);
-  // const [ loginSucess, setloginSucess ] = useState(true);
+  const [loginRole, setloginRole] = useState('');
   const navigate = useNavigate();
   const { setUser } = useContext(ShoppingContext);
 
@@ -27,9 +27,8 @@ function Login() {
       setToken(token);
 
       const userData = await getRequest('/login/validate');
+      setloginRole(userData.role);
 
-      // localStorage.setItem('token', token);
-      // localStorage.setItem('role', role);
       localStorage.setItem('user', JSON.stringify(userData));
       setUser(userData);
 
@@ -65,7 +64,15 @@ function Login() {
     navigate('/register');
   }
 
-  if (isLogged) return <Navigate to="/customer/products" />;
+  if (isLogged) {
+    if (loginRole === 'administrator') {
+      return <Navigate to="/admin/manage" />;
+    }
+    if (loginRole === 'seller') {
+      return <Navigate to="/seller/orders" />;
+    }
+    return <Navigate to="/customer/products" />;
+  }
 
   return (
     <main id="login">
@@ -127,9 +134,3 @@ function Login() {
 }
 
 export default Login;
-
-// fulana@deliveryapp.com
-// fulana@123
-// common_login__button-login
-// common_login__button-register
-// common_login__element-invalid-email

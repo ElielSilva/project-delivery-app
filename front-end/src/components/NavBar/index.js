@@ -18,7 +18,7 @@ export default function NavBar({ myOrders }) {
   function btnQuit() {
     setTotalPrice(0);
     localStorage.clear();
-    navigate('/');
+    navigate('/login');
   }
 
   function btnProducts() {

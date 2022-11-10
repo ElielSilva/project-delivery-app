@@ -30,7 +30,7 @@ export default function BoxOrders({ orders }) {
             { new Date(saleDate).toLocaleDateString() }
           </p>
           <p data-testid={ `${testIds[36]}${i}` }>
-            { totalPrice.toFixed(2).replace('.', ',') }
+            { totalPrice.replace('.', ',') }
           </p>
         </div>
       </button>
@@ -43,7 +43,7 @@ BoxOrders.propTypes = {
   orders: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number,
-      totalPrice: PropTypes.number,
+      totalPrice: PropTypes.string,
       saleDate: PropTypes.string,
       status: PropTypes.string,
     }),

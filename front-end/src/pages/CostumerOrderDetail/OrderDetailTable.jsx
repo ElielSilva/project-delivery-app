@@ -45,7 +45,7 @@ export default function SoldProducts({ productsData, totalPrice }) {
       <div>
         <h2 data-testid={ `${testIds[46]}` }>
           Total: R$
-          { totalPrice.toFixed(2).replace('.', ',') }
+          { totalPrice.replace('.', ',') }
         </h2>
 
       </div>
@@ -65,5 +65,5 @@ SoldProducts.propTypes = {
       }),
     }),
   ).isRequired,
-  totalPrice: PropTypes.number.isRequired,
+  totalPrice: PropTypes.string.isRequired,
 };
