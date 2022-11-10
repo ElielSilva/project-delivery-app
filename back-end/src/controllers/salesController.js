@@ -21,4 +21,11 @@ module.exports = {
     const salesFromId = await salesService.getById(id);
     res.status(200).json(salesFromId);
   },
+
+  updateBySaleId: async (req, res) => {
+    const { id } = req.params;
+    const { status } = req.body;
+    const salesFromId = await salesService.updateBySaleId(id, status);
+    res.status(200).json(salesFromId);
+  },
 };

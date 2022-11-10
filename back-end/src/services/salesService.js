@@ -42,4 +42,12 @@ module.exports = {
     });
     return dataValues;
   },
+
+  updateBySaleId: async (id, status) => {
+    const [dataValues] = await Sales.update(
+      { status },
+      { where: { id } },
+    );
+    return dataValues;
+  },
 };
