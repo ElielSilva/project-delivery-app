@@ -26,41 +26,38 @@ export default function OrderDetail() {
   }, [orderId, employees]);
 
   useEffect(() => {
-    if (order && order.status === 'Entregue') setDelivered(true);
+    if (order && order.status === 'Em Trânsito') setDelivered(true);
     setReload(false);
   }, [orderId, employees, reload, order]);
 
   async function btnChangeStatus() {
-    // await patchRequest(`/sales/status/${orderId}/Entregue`);
+    await patchRequest(`/sales/status/${orderId}/Entregue`);
     setReload(true);
   }
 
   return (
     <div>
       <NavBar />
-      {!order
+      {!order || !seller
         ? (<h3>Carregando</h3>)
         : (
           <>
-            {seller
-              && (
-                <div>
-                  <p data-testid={ testIds[37] }>{`PEDIDO ${orderId}`}</p>
-                  <p data-testid={ testIds[38] }>{ seller.name }</p>
-                  <p data-testid={ testIds[39] }>
-                    { new Date(order.saleDate).toLocaleDateString() }
-                  </p>
-                  <p data-testid={ testIds[40] }>{ order.status }</p>
-                  <button
-                    data-testid={ testIds[47] }
-                    type="button"
-                    disabled={ !delivered }
-                    onClick={ () => btnChangeStatus() }
-                  >
-                    MARCAR COMO ENTREGUE
-                  </button>
-                </div>
-              )}
+            <div>
+              <p data-testid={ testIds[37] }>{`PEDIDO ${orderId}`}</p>
+              <p data-testid={ testIds[38] }>{ seller.name }</p>
+              <p data-testid={ testIds[39] }>
+                { new Date(order.saleDate).toLocaleDateString() }
+              </p>
+              <p data-testid={ testIds[40] }>{ order.status }</p>
+              <button
+                data-testid={ testIds[47] }
+                type="button"
+                disabled={ !delivered }
+                onClick={ () => btnChangeStatus() }
+              >
+                MARCAR COMO ENTREGUE
+              </button>
+            </div>
 
             <OrderDetailTable
               productsData={ order.products }
