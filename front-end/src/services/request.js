@@ -19,6 +19,11 @@ export const postRequest = async (endpoint, body) => {
   return data;
 };
 
+export const patchRequest = async (endpoint, body) => {
+  const { data } = await api.patch(endpoint, body);
+  return data;
+};
+
 // export const requestRegister = async (endpoint, body) => {
 //   const { data } = await api.post(endpoint, body);
 //   // console.log(data);
