@@ -38,9 +38,9 @@ export default function OrderDetail() {
   return (
     <div>
       <NavBar />
-      {!order || !seller
-        ? (<h3>Carregando</h3>)
-        : (
+      {order
+        && seller
+        && (
           <>
             <div>
               <p data-testid={ testIds[37] }>{`PEDIDO ${orderId}`}</p>
