@@ -35,8 +35,6 @@ export default function NavBar({ myOrders }) {
         <p data-testid={ testIds[11] }>
           <button
             type="button"
-            label="sair"
-            data-testid="customer_products__element-navbar-link-logout"
             onClick={ () => btnProducts() }
           >
             Produtos
@@ -49,8 +47,6 @@ export default function NavBar({ myOrders }) {
           <p data-testid={ testIds[12] }>
             <button
               type="button"
-              label="sair"
-              data-testid="customer_products__element-navbar-link-logout"
               onClick={ () => btnCustomerOrders() }
             >
               Meus Pedidos
@@ -66,7 +62,6 @@ export default function NavBar({ myOrders }) {
       <div>
         <button
           type="button"
-          label="sair"
           data-testid={ testIds[14] }
           onClick={ () => btnQuit() }
         >

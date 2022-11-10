@@ -7,7 +7,7 @@ export const ShoppingContext = createContext();
 export function ShoppingProvider(childrens) {
   const [TotalPrice, setTotalPrice] = useState(0.00);
   const [employees, setEmployees] = useState([{ name: '', userId: '' }]);
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState();
 
   const { children } = childrens;
 
