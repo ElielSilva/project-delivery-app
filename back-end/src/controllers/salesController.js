@@ -13,7 +13,14 @@ module.exports = {
 
   getById: async (req, res) => {
     const { id } = req.params;
-    const salesFromId = await salesService.getById(id);
-    res.status(200).json(salesFromId);
+    const saleFromId = await salesService.getById(id);
+    res.status(200).json(saleFromId);
   },
+
+  statusUpdate: async (req, res) => {
+    const { id, newStatus } = req.params;
+    await salesService.statusUpdate({ id, newStatus });
+    res.status(201).json();
+  },
+
 };

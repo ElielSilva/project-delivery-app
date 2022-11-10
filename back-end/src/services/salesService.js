@@ -44,4 +44,16 @@ module.exports = {
     if (!dataValues) throw err.orderNotFound;
     return dataValues;
   },
+
+  statusUpdate: async ({ id, newStatus }) => {
+    console.log('sales service', id, newStatus);
+    const status = newStatus === 'emtransito'? 'Em transito' : newStatus;
+    const dataValues = await Sales.update({
+      status
+      }, {
+        where: { id }
+      });
+    if (!dataValues) throw err.orderNotFound;
+    return dataValues;
+  },
 };
