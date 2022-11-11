@@ -8,7 +8,7 @@ export function ShoppingProvider(childrens) {
   const [TotalPrice, setTotalPrice] = useState(0.00);
   const [sellerAllOrders, setSellerAllOrders] = useState([]);
   const [employees, setEmployees] = useState([{ name: '', userId: '' }]);
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState();
 
   const { children } = childrens;
 
@@ -23,7 +23,6 @@ export function ShoppingProvider(childrens) {
     };
     setInitialState();
     const currentUser = JSON.parse(localStorage.getItem('user'));
-    // console.log({ currentUser });
     setUser(currentUser);
   }, []);
 

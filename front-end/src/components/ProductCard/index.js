@@ -54,7 +54,7 @@ export default function ProductCard({ id, price, image, name }) {
     <main>
       <div>
         <p data-testid={ `customer_products__element-card-price-${id}` }>
-          {String(price.toFixed(2)).replace('.', ',')}
+          {price.toFixed(2).replace('.', ',')}
         </p>
         <img
           id="image"
