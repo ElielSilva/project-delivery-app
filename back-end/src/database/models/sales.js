@@ -3,7 +3,13 @@ module.exports = (sequelize, DataTypes) => {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
     userId: { type: DataTypes.INTEGER, foreignKey: true },
     sellerId: { type: DataTypes.INTEGER, foreignKey: true },
-    totalPrice: DataTypes.DECIMAL(4,2),
+    totalPrice: {
+      type: DataTypes.DECIMAL(4,2),
+      // get() {
+      //   const value = this.getDataValue('totalPrice');
+      //   return value ? parseFloat(value) : 0;
+      // }
+    },
     deliveryAddress: DataTypes.STRING(255),
     deliveryNumber: DataTypes.STRING(50),
     saleDate: {

@@ -20,6 +20,8 @@ const options = {
   dialect: 'mysql',
   dialectOptions: {
     timezone: 'Z',
+    decimalNumbers: true,
+    // force: true
   },
   logging: false,
 };
