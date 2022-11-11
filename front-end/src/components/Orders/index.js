@@ -22,7 +22,7 @@ export default function Orders({ id, status, saleDate, totalPrice, deliveryAddre
         <p data-testid={ `seller_orders__element-card-price-${id}` }>
           R$
           {' '}
-          {totalPrice}
+          {totalPrice.toFixed(2).replace('.', ',')}
         </p>
         <p data-testid={ `seller_orders__element-card-address-${id}` }>
           {(deliveryAddress)}
@@ -36,6 +36,6 @@ Orders.propTypes = {
   id: PropTypes.number.isRequired,
   status: PropTypes.string.isRequired,
   saleDate: PropTypes.string.isRequired,
-  totalPrice: PropTypes.number.isRequired,
+  totalPrice: PropTypes.string.isRequired,
   deliveryAddress: PropTypes.string.isRequired,
 };

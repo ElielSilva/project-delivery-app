@@ -19,9 +19,9 @@ export const postRequest = async (endpoint, body) => {
   return data;
 };
 
-// export const requestSellerOrders = async (endpoint) => {
-//   const { data } = await api.post(endpoint);
-//   return data;
-// };
+export const putRequest = async (endpoint, body) => {
+  const { data } = await api.put(endpoint, body);
+  return data;
+};
 
 export default api;

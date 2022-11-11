@@ -1,26 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
-export default function HeaderTable({ productsData }) {
-  const [total, setTotal] = useState();
+export default function OrdersDetailsTable({ productsData, totalPrice }) {
+  // const [total, setTotal] = useState();
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
     setProducts(productsData);
   }, [productsData]);
-
-  useEffect(() => {
-    const totalValue = products
-      .reduce((acc, cv) => acc + (cv.price * cv.quantity), 0)
-      .toFixed(2);
-    setTotal(totalValue);
-  }, [products, productsData]);
+  // console.log(typeof productsData.price, productsData.price);
+  // useEffect(() => {
+  //   const totalValue = products
+  //     .reduce((acc, cv) => acc + (cv.price * cv.quantity), 0)
+  //     .toFixed(2);
+  //   setTotal(totalValue);
+  // }, [products, productsData]);
 
   // function removeItem(index) {
   //   const newProducts = products.filter((_prod, i) => i !== index);
   //   localStorage.setItem('shoppingCart', JSON.stringify(newProducts));
   //   setProducts(newProducts);
   // }
+
+  // const x = ((parseFloat(price)).toFixed(2)).replace('.', ',');
 
   return (
     <div>
@@ -67,7 +69,9 @@ export default function HeaderTable({ productsData }) {
                   `seller_order_details__element-order-table-unit-price-${i}`
                 }
               >
-                { price.toFixed(2).replace('.', ',') }
+                {
+                  price.toFixed(2).replace('.', ',')
+                }
               </td>
 
               <td
@@ -75,15 +79,6 @@ export default function HeaderTable({ productsData }) {
               >
                 { `R$ ${(quantity * price).toFixed(2).replace('.', ',')}` }
               </td>
-
-              {/* <td data-testid={ `customer_checkout__element-order-table-remove-${i}` }>
-                <button
-                  type="button"
-                  onClick={ () => removeItem(i) }
-                >
-                  Remover
-                </button>
-              </td> */}
             </tr>
           ))}
         </tfoot>
@@ -91,7 +86,7 @@ export default function HeaderTable({ productsData }) {
       <div>
         <h2 data-testid="seller_order_details__element-order-total-price">
           Total: R$
-          { total }
+          { totalPrice.toFixed(2).replace('.', ',') }
         </h2>
 
       </div>
@@ -99,14 +94,19 @@ export default function HeaderTable({ productsData }) {
   );
 }
 
-HeaderTable.propTypes = {
+OrdersDetailsTable.propTypes = {
   productsData: PropTypes.arrayOf(
     PropTypes.shape({
+      id: PropTypes.number,
       name: PropTypes.string,
-      quantity: PropTypes.number,
       price: PropTypes.number,
+      salesProducts: PropTypes.shape({
+        quantity: PropTypes.number,
+        saleId: PropTypes.number,
+      }),
     }),
   ).isRequired,
+  totalPrice: PropTypes.string.isRequired,
 };
 
 // - 58: seller_order_details__element-order-table-item-number-<index>

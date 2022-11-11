@@ -1,33 +1,59 @@
-import React from 'react';
-// import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
 import { PropTypes } from 'prop-types';
+import { putRequest } from '../../services/request';
 
-export default function HeaderOrdersDetails({ id, status, saleDate }) {
-  // const x = saleDate;
-  // console.log(x);
+export default function HeaderOrdersDetails({ saleId, status, saleDate }) {
+  const [Status, setStatus] = useState();
+  // console.log(saleId);
+
+  useEffect(() => {
+    setStatus(status);
+  }, [status]);
+
+  // useEffect(() => {
+  //   setStatus(status);
+  // }, [status]);
+
+  async function btnChangeStatus(btnStatus) {
+    if (Status !== btnStatus) {
+      setStatus(btnStatus);
+      // aqui ficará a requisição ao backend
+      await putRequest(`/sales/sellers/${saleId}`, { status: btnStatus });
+    }
+  }
 
   return (
     <main>
       <p
-        data-testid={ `seller_order_details__element-order-details-label-order-${id}` }
+        data-testid="seller_order_details__element-order-details-label-order-id"
       >
-        {id}
+        {saleId}
       </p>
       <p
         data-testid="seller_order_details__element-order-details-label-order-date"
       >
         {new Date(saleDate).toLocaleDateString()}
       </p>
-      <button
+      <p
         type="button"
         data-testid="seller_order_details__element-order-details-label-delivery-status"
       >
-        {status}
-      </button>
-      <button type="button" data-testid="seller_order_details__button-preparing-check">
+        {Status}
+      </p>
+      <button
+        type="button"
+        data-testid="seller_order_details__button-preparing-check"
+        disabled={ Status !== 'Pendente' }
+        onClick={ () => btnChangeStatus('Preparando') }
+      >
         preparar pedido
       </button>
-      <button type="button" data-testid="seller_order_details__button-dispatch-check">
+      <button
+        type="button"
+        data-testid="seller_order_details__button-dispatch-check"
+        disabled={ Status !== 'Preparando' }
+        onClick={ () => btnChangeStatus('Em Trânsito') }
+      >
         saiu pra entrega
       </button>
     </main>
@@ -36,7 +62,7 @@ export default function HeaderOrdersDetails({ id, status, saleDate }) {
 }
 
 HeaderOrdersDetails.propTypes = {
-  id: PropTypes.number.isRequired,
+  saleId: PropTypes.number.isRequired,
   status: PropTypes.string.isRequired,
   saleDate: PropTypes.string.isRequired,
 };
