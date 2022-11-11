@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import SoldProductsTable from './table';
+import SoldProductsTable from './SoldProductsTable';
 import NavBar from '../../components/NavBar';
 import { ShoppingContext } from '../../context/ShoppingContext';
 import { postRequest } from '../../services/request';
@@ -41,13 +41,11 @@ export default function CustomerCheckout() {
   }
 
   async function btnSubmitOrder() {
-    console.log(seller);
     const { address, number } = deliveryAddress;
     const sales = products.map(({ id, quantity }) => (
       { productId: id, quantity }
     ));
-    console.log({ seller });
-    const BodyData = {
+    const newOrder = {
       userId: user.id,
       sellerId: seller.id,
       totalPrice: TotalPrice.toFixed(2),
@@ -56,11 +54,12 @@ export default function CustomerCheckout() {
       sales,
     };
 
-    const orderData = await postRequest('/sales/orders', BodyData);
+    const orderData = await postRequest('/sales/orders', newOrder);
+    localStorage.setItem('shoppingCart', JSON.stringify([]));
     navigate(`/customer/orders/${orderData.id}`);
   }
 
-  function handleSeller(empId) {
+  function handleSeller({ value: empId }) {
     const employeeData = employees.filter((e) => e.id === Number(empId));
     setSeller({
       name: employeeData.name,
@@ -98,15 +97,15 @@ export default function CustomerCheckout() {
             data-testid="customer_checkout__select-seller"
             name="employee"
             id="employee"
-            onClick={ ({ target }) => {
-              console.log(target.value);
-              handleSeller(target.value);
+            onClick={ (event) => {
+              handleSeller(event.target);
             } }
           >
             { employees.map(({ name, id }, i) => (
               <option
                 key={ i }
                 value={ id }
+                id={ name }
               >
                 { name }
               </option>

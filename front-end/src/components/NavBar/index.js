@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { PropTypes } from 'prop-types';
 import { ShoppingContext } from '../../context/ShoppingContext';
-// import { PropTypes } from 'prop-types';
+import testIds from '../../testIds';
 
-export default function NavBar() {
+export default function NavBar({ myOrders }) {
   const [name, setName] = useState('');
   const { setTotalPrice } = useContext(ShoppingContext);
 
@@ -24,46 +25,44 @@ export default function NavBar() {
     navigate('/customer/products');
   }
 
-  function btnCustomerCheckout() {
-    navigate('/customer/checkout');
+  function btnCustomerOrders() {
+    navigate('/customer/orders');
   }
 
   return (
     <div>
       <div>
-        <p>
+        <p data-testid={ testIds[11] }>
           <button
             type="button"
-            // label="sair"
-            data-testid="customer_products__element-navbar-link-products"
             onClick={ () => btnProducts() }
           >
             Produtos
           </button>
         </p>
       </div>
+      { myOrders
+      && (
+        <div>
+          <p data-testid={ testIds[12] }>
+            <button
+              type="button"
+              onClick={ () => btnCustomerOrders() }
+            >
+              Meus Pedidos
+            </button>
+          </p>
+        </div>
+      )}
       <div>
-        <p>
-          <button
-            type="button"
-            // label="sair"
-            data-testid="customer_products__element-navbar-link-orders"
-            onClick={ () => btnCustomerCheckout() }
-          >
-            Meus Pedidos
-          </button>
-        </p>
-      </div>
-      <div>
-        <p data-testid="customer_products__element-navbar-user-full-name">
+        <p data-testid={ testIds[13] }>
           {name}
         </p>
       </div>
       <div>
         <button
           type="button"
-          // label="sair"
-          data-testid="customer_products__element-navbar-link-logout"
+          data-testid={ testIds[14] }
           onClick={ () => btnQuit() }
         >
           Sair
@@ -72,3 +71,11 @@ export default function NavBar() {
     </div>
   );
 }
+
+NavBar.defaultProps = {
+  myOrders: true,
+};
+
+NavBar.propTypes = {
+  myOrders: PropTypes.bool,
+};

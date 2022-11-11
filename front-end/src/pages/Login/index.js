@@ -43,12 +43,22 @@ function Login() {
     setFailedTryLogin(false);
   }, [email, password]);
 
-  // useEffect(() => {
-  //   const {token} = JSON.parse(localStorage.getItem('user'))
-  //   setToken(token);
-  //   const userData = await getRequest('/login/validate');
-  //   if (userData) Navigate("./customer/products")
-  // }, []);
+  useEffect(() => {
+    async function verifyLocalStorageUser(token) {
+      try {
+        setToken(token);
+        const userData = await getRequest('/login/validate');
+        if (userData) {
+          localStorage.setItem('user', JSON.stringify(userData));
+          navigate('/customer/products');
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    }
+    const logUser = JSON.parse(localStorage.getItem('user'));
+    if (logUser) verifyLocalStorageUser(logUser.token);
+  }, [navigate]);
 
   function btnResgister() {
     navigate('/register');
