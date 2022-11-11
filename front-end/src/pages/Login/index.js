@@ -44,7 +44,7 @@ function Login() {
   }, [email, password]);
 
   useEffect(() => {
-    async function tokenVerify(token) {
+    async function verifyLocalStorageUser(token) {
       try {
         setToken(token);
         const userData = await getRequest('/login/validate');
@@ -57,7 +57,7 @@ function Login() {
       }
     }
     const logUser = JSON.parse(localStorage.getItem('user'));
-    if (logUser) tokenVerify(logUser.token);
+    if (logUser) verifyLocalStorageUser(logUser.token);
   }, [navigate]);
 
   function btnResgister() {
