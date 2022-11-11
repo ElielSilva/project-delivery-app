@@ -10,7 +10,7 @@ export default function BoxOrders({ orders }) {
     navigate(`/customer/orders/${pathId}`);
   }
   return (
-    orders.map(({ id, totalPrice, saleDate, status }, i) => (
+    orders.map(({ id, totalPrice, saleDate, status }) => (
       <button
         key={ id }
         className="btn-box-order"
@@ -18,18 +18,18 @@ export default function BoxOrders({ orders }) {
         onClick={ () => btnOrderDetails(id) }
       >
         <div>
-          <div data-testid={ `${testIds[33]}${i}` }>
+          <div data-testid={ `${testIds[33]}${id}` }>
             <p>Pedido</p>
             <p>{ id }</p>
           </div>
 
-          <p data-testid={ `${testIds[34]}${i}` }>
+          <p data-testid={ `${testIds[34]}${id}` }>
             { status }
           </p>
-          <p data-testid={ `${testIds[35]}${i}` }>
+          <p data-testid={ `${testIds[35]}${id}` }>
             { new Date(saleDate).toLocaleDateString() }
           </p>
-          <p data-testid={ `${testIds[36]}${i}` }>
+          <p data-testid={ `${testIds[36]}${id}` }>
             { totalPrice.toFixed(2).replace('.', ',') }
           </p>
         </div>

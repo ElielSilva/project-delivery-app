@@ -32,8 +32,9 @@ export default function NavBar({ myOrders }) {
   return (
     <div>
       <div>
-        <p data-testid={ testIds[11] }>
+        <p>
           <button
+            data-testid={ testIds[11] }
             type="button"
             onClick={ () => btnProducts() }
           >
@@ -44,14 +45,14 @@ export default function NavBar({ myOrders }) {
       { myOrders
       && (
         <div>
-          <p data-testid={ testIds[12] }>
-            <button
-              type="button"
-              onClick={ () => btnCustomerOrders() }
-            >
-              Meus Pedidos
-            </button>
-          </p>
+
+          <button
+            data-testid={ testIds[12] }
+            type="button"
+            onClick={ () => btnCustomerOrders() }
+          >
+            Meus Pedidos
+          </button>
         </div>
       )}
       <div>

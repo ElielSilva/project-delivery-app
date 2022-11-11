@@ -1,6 +1,7 @@
 const { Router } = require('express');
 const salesController = require('../controllers/salesController');
 const auth = require('../middlewares/auth');
+// import statusUpdateMiddleware from '../middlewares/update'
 
 const salesRouter = Router();
 
